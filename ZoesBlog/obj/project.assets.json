@@ -2,6 +2,9 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.0": {
+      "Font.Awesome/5.11.1": {
+        "type": "package"
+      },
       "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -2500,6 +2503,60 @@
     }
   },
   "libraries": {
+    "Font.Awesome/5.11.1": {
+      "sha512": "2nb4iT16k26Hy1wLANgHGXFupqoJ+ZezbcOj8PH8KgP1QwB/ygSQYnbt4I6E6bXRzr6A1AHH6d6NdiDtJva66g==",
+      "type": "package",
+      "path": "font.awesome/5.11.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Content/brands.css",
+        "Content/Content/brands.min.css",
+        "Content/Content/fontawesome-all.css",
+        "Content/Content/fontawesome-all.min.css",
+        "Content/Content/fontawesome.css",
+        "Content/Content/fontawesome.min.css",
+        "Content/Content/regular.css",
+        "Content/Content/regular.min.css",
+        "Content/Content/solid.css",
+        "Content/Content/solid.min.css",
+        "Content/Content/svg-with-js.css",
+        "Content/Content/svg-with-js.min.css",
+        "Content/Content/v4-shims.css",
+        "Content/Content/v4-shims.min.css",
+        "Content/Scripts/fontawesome/all.js",
+        "Content/Scripts/fontawesome/all.min.js",
+        "Content/Scripts/fontawesome/brands.js",
+        "Content/Scripts/fontawesome/brands.min.js",
+        "Content/Scripts/fontawesome/conflict-detection.js",
+        "Content/Scripts/fontawesome/conflict-detection.min.js",
+        "Content/Scripts/fontawesome/fontawesome.js",
+        "Content/Scripts/fontawesome/fontawesome.min.js",
+        "Content/Scripts/fontawesome/regular.js",
+        "Content/Scripts/fontawesome/regular.min.js",
+        "Content/Scripts/fontawesome/solid.js",
+        "Content/Scripts/fontawesome/solid.min.js",
+        "Content/Scripts/fontawesome/v4-shims.js",
+        "Content/Scripts/fontawesome/v4-shims.min.js",
+        "Content/webfonts/fa-brands-400.eot",
+        "Content/webfonts/fa-brands-400.svg",
+        "Content/webfonts/fa-brands-400.ttf",
+        "Content/webfonts/fa-brands-400.woff",
+        "Content/webfonts/fa-brands-400.woff2",
+        "Content/webfonts/fa-regular-400.eot",
+        "Content/webfonts/fa-regular-400.svg",
+        "Content/webfonts/fa-regular-400.ttf",
+        "Content/webfonts/fa-regular-400.woff",
+        "Content/webfonts/fa-regular-400.woff2",
+        "Content/webfonts/fa-solid-900.eot",
+        "Content/webfonts/fa-solid-900.svg",
+        "Content/webfonts/fa-solid-900.ttf",
+        "Content/webfonts/fa-solid-900.woff",
+        "Content/webfonts/fa-solid-900.woff2",
+        "font.awesome.5.11.1.nupkg.sha512",
+        "font.awesome.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
       "sha512": "Y4rs5aMEXY8G7wJo5S3EEt6ltqyOTr/qOeZzfn+hw/fuQj5GppGckMY5psGLETo1U9hcT5MmAhaT5xtusM1b5g==",
       "type": "package",
@@ -8034,6 +8091,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
+      "Font.Awesome >= 5.11.1",
       "Microsoft.EntityFrameworkCore >= 3.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 3.0.0",
@@ -8082,6 +8140,10 @@
     "frameworks": {
       "netcoreapp3.0": {
         "dependencies": {
+          "Font.Awesome": {
+            "target": "Package",
+            "version": "[5.11.1, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[3.0.0, )"

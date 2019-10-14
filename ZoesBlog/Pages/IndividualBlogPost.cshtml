@@ -1,23 +1,16 @@
-﻿@page
+﻿@page "{blogPostId:int}"
 @model IndividualBlogPostModel
 @{
+	ViewData["Title"] = "BlogPost";
 }
 
-@foreach (var blogPost in Model.BlogPosts)
-{
-	<p>
-		<div style="text-align:center">
-			<h1>@blogPost.Title</h1>
-			<div>@blogPost.Body</div>
-			<div class="btn-group btn-group-justified">
-				<div class="btn-group">
-					<button type="submit" class="btn btn-primary btn-sm">Edit</button>
-				</div>
-				<div class="btn-group">
-					<button type="submit" class="btn btn-danger btn-sm">Delete</button>
-					<a asp-area="" asp-page="/DeleteBlogPost">Delete Blog Post</a>
-				</div>
-			</div>
-		</div>
-	</p>
-}
+@*<h2>@BlogPost.Title</h2>
+<div>
+	Id: @Model.Id
+</div>
+<div>
+	Location: @Model.Restaurant.Location
+</div>
+<div>
+	Cuisine: @Model.Restaurant.Cuisine
+</div>*@

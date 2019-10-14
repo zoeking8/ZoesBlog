@@ -9,24 +9,21 @@ using ZoesBlog.Data;
 
 namespace ZoesBlog.Pages
 {
-	public class IndividualBlogPostModel : PageModel
-	{
+    public class AdminModel : PageModel
+    {
 		private readonly ILogger<IndexModel> _logger;
 		private readonly BlogDbContext _blogDbContext;
-
-		public BlogPost BlogPost { get; set; }
-
 		public IReadOnlyCollection<BlogPost> BlogPosts { get; private set; }
 
-		public IndividualBlogPostModel(BlogDbContext blogDbContext, ILogger<IndexModel> logger)
+		public AdminModel(BlogDbContext blogDbContext, ILogger<IndexModel> logger)
 		{
 			_blogDbContext = blogDbContext;
 			_logger = logger;
 		}
 
-		public IActionResult OnGet()
-		{
-			return Page();
+		public void OnGet()
+        {
+			BlogPosts = _blogDbContext.BlogPosts.ToList();
 		}
 	}
 }

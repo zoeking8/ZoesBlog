@@ -2,6 +2,7 @@
 using ZoesBlog.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 
 namespace ZoesBlog.Pages
 {
@@ -36,10 +37,25 @@ namespace ZoesBlog.Pages
 			return RedirectToPage("./Index");
 		}
 
-		public class Foo
+		public class UserInputBlogPost
 		{
 			public string Title { get; set; }
 			public string Body { get; set; }
 		}
+		//public class GeneratedData
+		//{
+		//	public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+			
+		//}
+		//public string PostReadTime(string text)
+		//{
+		//	var BlogPost = new BlogPost;
+		//	var text = blogPost.Body;
+
+		//	wordCount = text.( "-", " ").Split(" ").Length;
+		//	var readingTimeInMinutes = Math.Floor(wordCount / 228) + 1;
+
+		//}
+		//blogPost.PostReadTime(BlogPost blogPost);
 	}
 }
