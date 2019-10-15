@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using ZoesBlog.Data;
 
 namespace ZoesBlog.Pages
@@ -21,22 +22,60 @@ namespace ZoesBlog.Pages
 		[BindProperty]
 		public BlogPost BlogPost { get; set; }
 
-		public IActionResult OnGet()
+		public async Task<IActionResult> OnGetAsync(Guid? id)
 		{
-			return Page();
-		}
-		public async Task<IActionResult> OnPostAsync()
-		{
-			if (!ModelState.IsValid)
+			if (id == null)
 			{
-				return Page();
+				return NotFound();
 			}
 
-			_blogDbContext.BlogPosts.Remove(BlogPost);
+			BlogPost = await _blogDbContext.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
 
-			await _blogDbContext.SaveChangesAsync();
-
-			return RedirectToPage("./Index");
+			if (BlogPost == null)
+			{
+				return NotFound();
+			}
+			return Page();
 		}
+
+		public async Task<IActionResult> OnPostAsync(Guid? id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
+
+			BlogPost = await _blogDbContext.BlogPosts.FindAsync(id);
+
+			if (BlogPost != null)
+			{
+				_blogDbContext.BlogPosts.Remove(BlogPost);
+				await _blogDbContext.SaveChangesAsync();
+			}
+
+			return RedirectToPage("./Admin");
+		}
+
+
+
+
+
+
+		//public IActionResult OnGet()
+		//{
+		//	return Page();
+		//}
+		//public async Task<IActionResult> OnPostAsync()
+		//{
+		//	if (!ModelState.IsValid)
+		//	{
+		//		return Page();
+		//	}
+		//	_blogDbContext.BlogPosts.Remove(BlogPost);
+
+		//	await _blogDbContext.SaveChangesAsync();
+
+		//	return RedirectToPage("./Admin");
+		//}
 	}
 }

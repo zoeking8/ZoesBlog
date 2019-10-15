@@ -129,3 +129,4 @@ C:\blog\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\Razor\Pages\IndividualBlogPost
 C:\blog\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\Razor\Pages\Admin.cshtml.g.cs
 C:\blog\ZoesBlog\ZoesBlog\bin\Debug\netcoreapp3.0\libman.json
 C:\blog\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\ZoesBlog.MvcApplicationPartsAssemblyInfo.cache
+C:\blog\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\Razor\Pages\EditBlogPost.cshtml.g.cs
