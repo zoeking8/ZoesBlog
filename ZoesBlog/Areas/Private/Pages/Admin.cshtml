@@ -1,0 +1,33 @@
+﻿@page
+@model ZoesBlog.Areas.Private.Pages.AdminModel
+@{
+	ViewData["Title"] = "Admin";
+}
+
+<h2>Zoe's Blog Admin Page</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+		<tr>
+			<th scope="col">Blog Post Title</th>
+			<th scope="col">Edit</th>
+			<th scope="col">Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var blogPost in Model.BlogPosts)
+		{
+			<tr>	
+				<td>@blogPost.Title</td>
+				
+				<td>	
+					<a class="btn btn-lg" asp-page="./EditBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-edit"></i></a>
+				</td>
+				<td>
+					<a class="btn btn-lg" asp-page="./DeleteBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-trash"></i></a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
