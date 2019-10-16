@@ -12,27 +12,39 @@ namespace ZoesBlog.Pages
 {
 	public class EditBlogPostModel : PageModel
 	{
+		private readonly BlogDbContext _blogDbContext;
+
+		public EditBlogPostModel(BlogDbContext blogDbContext)
+		{
+			_blogDbContext = blogDbContext;
+		}
+
 		[BindProperty]
 		public BlogPost BlogPost { get; set; }
 
-		private readonly BlogDbContext _blogDbContext;
-		private readonly ILogger<EditBlogPostModel> _logger;
-
-		public EditBlogPostModel(BlogDbContext blogDbContext, ILogger<EditBlogPostModel> logger)
+		public async Task<IActionResult> OnPostAsync(Guid? id)
 		{
-			_blogDbContext = blogDbContext;
-			_logger = logger;
-		}
+			if (id == null)
+			{
+				return NotFound();
+			}
+			BlogPost = await _blogDbContext.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
 
+			if (BlogPost == null)
+			{
+				return NotFound();
+			}
+			return Page();
+
+		}
 		public async Task<IActionResult> OnPostAsync()
 		{
 			if (!ModelState.IsValid)
 			{
 				return Page();
 			}
-
 			_blogDbContext.Attach(BlogPost).State = EntityState.Modified;
-
+			
 			try
 			{
 				await _blogDbContext.SaveChangesAsync();
@@ -48,10 +60,9 @@ namespace ZoesBlog.Pages
 					throw;
 				}
 			}
-
 			return RedirectToPage("./Admin");
-		}
 
+		}
 		private bool BlogPostExists(Guid id)
 		{
 			return _blogDbContext.BlogPosts.Any(b => b.Id == id);

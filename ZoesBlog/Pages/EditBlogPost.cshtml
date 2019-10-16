@@ -1,11 +1,12 @@
 ﻿@page "{id:Guid}"
-@model ZoesBlog.Pages.EditBlogPostModel
+@model EditBlogPostModel
 @{
 	ViewData["Title"] = "EditBlogPost";
 }
 
 <h1>EditBlogPost</h1>
 <div style="text-align:center">
+	<input type="hidden" asp-for="@Model.BlogPost.Id" />
 	<h1>@Model.BlogPost.Title</h1>
 	<div>@Model.BlogPost.Body</div>
 	<div class="btn-group btn-group-justified">

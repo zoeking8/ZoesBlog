@@ -17,9 +17,7 @@ namespace ZoesBlog.Pages
 		public string Title { get; set; }
 		public Guid BlogPostId { get; set; }
 
-
-
-		public IndividualBlogPostModel(BlogDbContext blogDbContext, ILogger<IndexModel> logger)
+		public IndividualBlogPostModel(BlogDbContext blogDbContext)
 		{
 			_blogDbContext = blogDbContext;
 		}
@@ -39,17 +37,5 @@ namespace ZoesBlog.Pages
 			}
 			return Page();
 		}
-
-		//public IActionResult OnGet(string title, Guid blogPostId)
-		//{
-		//	Title = title;
-		//	BlogPostId = blogPostId;
-		//	BlogPost = _blogDbContext.BlogPosts.FirstOrDefault(x => x.Id == BlogPostId);
-		//	if (BlogPost == null)
-		//	{
-		//		return NotFound();
-		//	}
-		//	return Page();
-		//}
 	}
 }

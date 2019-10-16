@@ -41,13 +41,8 @@ namespace ZoesBlog.Pages
 		{
 			public string Title { get; set; }
 			public string Body { get; set; }
-			public DateTime PublishedAt { get; set; } = DateTime.UtcNow;
 		}
-		//public class GeneratedData
-		//{
-		//	public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-			
-		//}
+		
 		//public string PostReadTime(string text)
 		//{
 		//	var BlogPost = new BlogPost;
