@@ -11,6 +11,7 @@
 		<tr>
 		<tr>
 			<th scope="col">Blog Post Title</th>
+			<th scope="col">Published At</th>
 			<th scope="col">Edit</th>
 			<th scope="col">Delete</th>
 		</tr>
@@ -20,6 +21,7 @@
 		{
 			<tr>	
 				<td>@blogPost.Title</td>
+				<td>@blogPost.PublishedAt</td>
 				
 				<td>	
 					<a class="btn btn-lg" asp-page="./EditBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-edit"></i></a>

@@ -22,7 +22,7 @@ namespace ZoesBlog.Pages
 		[BindProperty]
 		public BlogPost BlogPost { get; set; }
 
-		public async Task<IActionResult> OnGetAsync(Guid? id)
+		public async Task<IActionResult> OnGetAsync(Guid id)
 		{
 			if (id == null)
 			{
@@ -38,7 +38,7 @@ namespace ZoesBlog.Pages
 			return Page();
 		}
 
-		public async Task<IActionResult> OnPostAsync(Guid? id)
+		public async Task<IActionResult> OnPostAsync(Guid id)
 		{
 			if (id == null)
 			{

@@ -22,12 +22,13 @@ namespace ZoesBlog.Pages
 		[BindProperty]
 		public BlogPost BlogPost { get; set; }
 
-		public async Task<IActionResult> OnPostAsync(Guid? id)
+		public async Task<IActionResult> OnPostAsync(Guid id)
 		{
 			if (id == null)
 			{
 				return NotFound();
 			}
+
 			BlogPost = await _blogDbContext.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
 
 			if (BlogPost == null)

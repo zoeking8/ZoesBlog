@@ -7,11 +7,11 @@
 @foreach (var blogPost in Model.BlogPosts)
 {
 	<p>
-		<div style="text-align:center">
+		<div>
 			<h1>
 				<a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id">@blogPost.Title</a>
 			</h1>
-			<div>@blogPost.PublishedAt</div>
+			<div>This post was published on: @blogPost.PublishedAt</div>
 			<div>@blogPost.Body</div>
 		</div>
 	</p>
