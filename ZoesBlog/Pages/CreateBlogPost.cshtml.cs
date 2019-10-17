@@ -29,8 +29,15 @@ namespace ZoesBlog.Pages
 			{
 				return Page();
 			}
-
-			_blogDbContext.BlogPosts.Add(BlogPost);
+			var blogPost = new BlogPost
+			{
+				PublishedAt = DateTime.UtcNow,
+				Title = BlogPost.Title,
+				Body = BlogPost.Body
+			};
+			//var tagList = BlogPost.Tags.Split(" ").Where(t => !string.IsNullOrEmpty(t));
+			//var tagEntities = new List<Tag>();
+			_blogDbContext.BlogPosts.Add(blogPost);
 
 			await _blogDbContext.SaveChangesAsync();
 
@@ -41,8 +48,10 @@ namespace ZoesBlog.Pages
 		{
 			public string Title { get; set; }
 			public string Body { get; set; }
+			//public string Tags { get; set; }
+
 		}
-		
+
 		//public string PostReadTime(string text)
 		//{
 		//	var BlogPost = new BlogPost;
