@@ -19,7 +19,7 @@ namespace ZoesBlog.Pages
 		}
 
 		[BindProperty]
-		public UserInputBlogPost BlogPost { get; set; }
+		public UserInputBlogPost UserBlogPost { get; set; }
 		public IActionResult OnGet()
 		{
 			return Page();
@@ -35,13 +35,13 @@ namespace ZoesBlog.Pages
 			var blogPost = new BlogPost
 			{
 				PublishedAt = DateTime.UtcNow,
-				Title = BlogPost.Title,
-				Body = BlogPost.Body
+				Title = UserBlogPost.Title,
+				Body = UserBlogPost.Body,
 			};
 
 			SlugHelper helper = new SlugHelper();
 
-			var tagList = BlogPost.Tags.Split(",")
+			var tagList = UserBlogPost.Tags.Split(",")
 				.Where(t => !string.IsNullOrEmpty(t));
 			var tags = new List<Tag>();
 
@@ -53,7 +53,7 @@ namespace ZoesBlog.Pages
 					Name = userTag,
 					UrlSlug = helper.GenerateSlug(userTag)
 				};
-				blogPost.Tags.Add(tag);
+				tags.Add(tag);
 			}
 
 			blogPost.Tags = tags;

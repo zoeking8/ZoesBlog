@@ -4,17 +4,37 @@
 	ViewData["Title"] = "Index";
 }
 
-@foreach (var blogPost in Model.BlogPosts)
+@foreach (var blogPost in Model.AccessTags)
 {
-	<p>
+	
+	<div>
+		<h1>
+			<a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id">@blogPost.Title</a>
+		</h1>
+		<div>This post was published on: @blogPost.PublishedAt</div>
+		<div>@blogPost.Body</div>
+
 		<div>
-			<h1>
-				<a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id">@blogPost.Title</a>
-			</h1>
-			<div>This post was published on: @blogPost.PublishedAt</div>
-			<div>@blogPost.Body</div>
+				@if (blogPost.Tags == null)
+				{
+					<div>
+						<p>This blog post has no tags</p>
+					</div>
+				}
+				else
+				{
+					@foreach (var tag in blogPost.Tags)
+					{
+						<a class="badge badge-primary"
+							asp-page="./IndividualBlogPost"
+						asp-route-blogPostId="@tag.BlogPostId">
+						@tag.Name
+						</a>
+					}
+				}
 		</div>
-	</p>
+	</div>
+	<br>
 	
 }
 <nav aria-label="Page navigation example">

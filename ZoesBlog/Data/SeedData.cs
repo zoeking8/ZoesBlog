@@ -24,7 +24,7 @@ namespace ZoesBlog.Data
 						{
 							Id = Guid.NewGuid(),
 							Title = "Hello World!",
-							Body = "This is my first blog post.",
+							Body = "This is my first blog post weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.",
 							PublishedAt = DateTime.UtcNow,
 							Tags = new List<Tag>{new Tag
 							{

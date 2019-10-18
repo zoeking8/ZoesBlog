@@ -55,27 +55,5 @@ namespace ZoesBlog.Pages
 
 			return RedirectToPage("./Admin");
 		}
-
-
-
-
-
-
-		//public IActionResult OnGet()
-		//{
-		//	return Page();
-		//}
-		//public async Task<IActionResult> OnPostAsync()
-		//{
-		//	if (!ModelState.IsValid)
-		//	{
-		//		return Page();
-		//	}
-		//	_blogDbContext.BlogPosts.Remove(BlogPost);
-
-		//	await _blogDbContext.SaveChangesAsync();
-
-		//	return RedirectToPage("./Admin");
-		//}
 	}
 }

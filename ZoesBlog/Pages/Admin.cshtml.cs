@@ -24,6 +24,10 @@ namespace ZoesBlog.Pages
 		public void OnGet()
         {
 			BlogPosts = _blogDbContext.BlogPosts.ToList();
+			
+			//var newPostFirst = _blogDbContext.BlogPosts.ToList();
+			//newPostFirst.Reverse();
+			//BlogPosts = newPostFirst;
 		}
 	}
 }

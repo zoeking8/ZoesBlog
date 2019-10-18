@@ -21,6 +21,7 @@ namespace ZoesBlog.Pages
 
 		[BindProperty]
 		public BlogPost BlogPost { get; set; }
+	
 
 		public async Task<IActionResult> OnPostAsync(Guid id)
 		{
@@ -52,7 +53,7 @@ namespace ZoesBlog.Pages
 			}
 			catch (DbUpdateConcurrencyException)
 			{
-				if (!BlogPostExists(BlogPost.Id))
+				if (!_blogDbContext.BlogPosts.Any(bp => bp.Id == BlogPost.Id))
 				{
 					return NotFound();
 				}
@@ -63,10 +64,6 @@ namespace ZoesBlog.Pages
 			}
 			return RedirectToPage("./Admin");
 
-		}
-		private bool BlogPostExists(Guid id)
-		{
-			return _blogDbContext.BlogPosts.Any(b => b.Id == id);
 		}
 	}
 }

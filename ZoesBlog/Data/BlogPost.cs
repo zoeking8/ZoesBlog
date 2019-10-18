@@ -7,6 +7,8 @@ namespace ZoesBlog.Data
 {
 	public class BlogPost
 	{
+	
+
 		public Guid Id { get; set; }
 		public DateTime PublishedAt { get; set; }
 		[Required, StringLength(50, MinimumLength = 3)]
@@ -16,7 +18,9 @@ namespace ZoesBlog.Data
 		public  List<Tag> Tags { get; set; }
 
 		//public string TimeToRead { get; set; }
-		//public string Snippit { get; set; }
 		//public List<Comment> Comments { get; set; }
+		//public string Snippit { get; set; }
+
+
 	}
 }

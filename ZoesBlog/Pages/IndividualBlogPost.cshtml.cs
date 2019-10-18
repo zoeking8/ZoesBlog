@@ -22,7 +22,7 @@ namespace ZoesBlog.Pages
 			_blogDbContext = blogDbContext;
 		}
 		public BlogPost BlogPost { get; private set; }
-		public async Task<IActionResult> OnGetAsync(Guid? id)
+		public async Task<IActionResult> OnGetAsync(Guid id)
 		{
 			if (id == null)
 			{

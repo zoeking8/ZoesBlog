@@ -23,10 +23,15 @@
 				<span asp-validation-for="BlogPost.Body" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<input type="submit" value="Save" class="btn btn-primary" />
+				<label asp-for="BlogPost.Tags" class="control-label"></label>
+				<input asp-for="BlogPost.Tags" class="form-control" />
+				<span asp-validation-for="BlogPost.Tags" class="text-danger"></span>
 			</div>
-		</form>
+		<div class="form-group">
+		<input type="submit" value="Save" class="btn btn-primary" />
 	</div>
+	</form>
+</div>
 </div>
 
 <div>
