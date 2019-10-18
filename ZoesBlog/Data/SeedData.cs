@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Slugify;
 
 namespace ZoesBlog.Data
 {
@@ -13,6 +14,8 @@ namespace ZoesBlog.Data
 		{
 			using (var context = new BlogDbContext(serviceProvider.GetRequiredService<DbContextOptions<BlogDbContext>>()))
 			{
+				SlugHelper helper = new SlugHelper();
+
 				if (!context.BlogPosts.Any())
 				{
 					context.BlogPosts.AddRange
@@ -22,8 +25,16 @@ namespace ZoesBlog.Data
 							Id = Guid.NewGuid(),
 							Title = "Hello World!",
 							Body = "This is my first blog post.",
-							PublishedAt = DateTime.UtcNow
+							PublishedAt = DateTime.UtcNow,
+							Tags = new List<Tag>{new Tag
+							{
+							Id = Guid.NewGuid(),
+							Name = "Tag Test",
+							UrlSlug = helper.GenerateSlug("Tag Test")
+
+						}   }
 						}
+						
 					);
 				}
 

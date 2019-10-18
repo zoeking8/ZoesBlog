@@ -11,5 +11,6 @@ namespace ZoesBlog.Data
 		public string Name { get; set; }
 		public BlogPost blogPost { get; set; }
 		public Guid BlogPostId { get; set; }
+		public string UrlSlug { get; set; }
 	}
 }

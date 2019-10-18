@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ZoesBlog.Data;
+using Serilog;
+using Serilog.Events;
 
 namespace ZoesBlog
 {
@@ -39,6 +41,20 @@ namespace ZoesBlog
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder.UseStartup<Startup>();
+					//webBuilder.UseSerilog((hostingContext, loggerConfiguration) =>
+
+					//loggerConfiguration
+					//		.Enrich.FromLogContext()
+					//		.MinimumLevel.Is(hostingContext.Configuration.GetValue<LogEventLevel>("Serilog: LogEventLevel")));
+
+					//var seqUrl = "localhost:5341";
+
+					//loggerConfiguration.WriteTo.Seq;
+					//(
+					//	seqUrl,
+					//	apiKey:hostingContext.Configuration.GetValue
+					//)
 				});
+
 	}
 }
