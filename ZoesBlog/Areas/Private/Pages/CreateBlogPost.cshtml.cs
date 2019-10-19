@@ -1,15 +1,15 @@
-﻿using System.Threading.Tasks;
-using ZoesBlog.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using Slugify;
+using ZoesBlog.Data;
 
-namespace ZoesBlog.Pages
+namespace ZoesBlog.Areas.Private.Pages
 {
-	public class CreateBlogPostModel : PageModel
+    public class CreateBlogPostModel : PageModel
 	{
 		private readonly BlogDbContext _blogDbContext;
 
@@ -64,7 +64,6 @@ namespace ZoesBlog.Pages
 
 			return RedirectToPage("./Index");
 		}
-
 		public class UserInputBlogPost
 		{
 			public string Title { get; set; }

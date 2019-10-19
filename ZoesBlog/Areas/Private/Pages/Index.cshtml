@@ -1,5 +1,5 @@
 ﻿@page
-@model AdminModel
+@model ZoesBlog.Areas.Private.Pages.IndexModel
 @{
 	Layout = "_AdminLayout";
 }
@@ -19,15 +19,15 @@
 	<tbody>
 		@foreach (var blogPost in Model.BlogPosts)
 		{
-			<tr>	
+			<tr>
 				<td>@blogPost.Title</td>
 				<td>@blogPost.PublishedAt</td>
-				
-				<td>	
-					<a class="btn btn-lg" asp-page="./EditBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-edit"></i></a>
+
+				<td>
+					<a class="btn btn-lg" asp-area="Private" asp-page="./EditBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-edit"></i></a>
 				</td>
 				<td>
-					<a class="btn btn-lg" asp-page="./DeleteBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-trash"></i></a>
+					<a class="btn btn-lg" asp-area="Private" asp-page="./DeleteBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-trash"></i></a>
 				</td>
 			</tr>
 		}

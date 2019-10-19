@@ -1,14 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using ZoesBlog.Data;
 
-namespace ZoesBlog.Pages
+namespace ZoesBlog.Areas.Private.Pages
 {
 	public class EditBlogPostModel : PageModel
 	{
@@ -21,7 +20,7 @@ namespace ZoesBlog.Pages
 
 		[BindProperty]
 		public BlogPost BlogPost { get; set; }
-	
+
 
 		public async Task<IActionResult> OnPostAsync(Guid id)
 		{
@@ -46,7 +45,7 @@ namespace ZoesBlog.Pages
 				return Page();
 			}
 			_blogDbContext.Attach(BlogPost).State = EntityState.Modified;
-			
+
 			try
 			{
 				await _blogDbContext.SaveChangesAsync();

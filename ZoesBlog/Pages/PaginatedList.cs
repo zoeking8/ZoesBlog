@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Humanizer;
 using Microsoft.EntityFrameworkCore;
 using ZoesBlog.Data;
 
@@ -15,8 +16,15 @@ namespace ZoesBlog.Pages
 			var readingTimeInMinutes = Math.Floor(wordCount / 228d) + 1;
 			return readingTimeInMinutes;
 		}
+		public void TimeSincePosted(BlogPost blogPost)
+		{
+			var timePosted = blogPost.PublishedAt;
+			//TimeSpan.FromMinutes(timePosted).Humanize(5);
+
+		}
+
 	}
-	
+
 
 
 	//	public class PaginatedList

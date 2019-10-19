@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ZoesBlog.Data;
 
-namespace ZoesBlog.Pages
+namespace ZoesBlog.Areas.Private.Pages
 {
-
-	public class DeleteBlogPostModel : PageModel
-    {
+    public class DeleteBlogPostModel : PageModel
+	{
 		private readonly BlogDbContext _blogDbContext;
 
 		public DeleteBlogPostModel(BlogDbContext blogDbContext)

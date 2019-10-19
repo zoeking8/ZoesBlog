@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using ZoesBlog.Data;
 
 namespace ZoesBlog.Pages
 {
-	public class IndividualBlogPostModel : PageModel
+    public class IndividualBlogPostModel : PageModel
 	{
 		private readonly BlogDbContext _blogDbContext;
 
