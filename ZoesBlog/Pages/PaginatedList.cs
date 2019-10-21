@@ -45,17 +45,6 @@ namespace ZoesBlog.Pages
 			return new PaginatedList<T>(items, count, pageIndex, pageSize);
 		}
 
-		//	public double ReadTime(BlogPost blogPost)
-		//	{
-		//		var wordCount = blogPost.Body.Split(" ").Length;
-		//		var readingTimeInMinutes = Math.Floor(wordCount / 228d) + 1;
-		//		return readingTimeInMinutes;
-		//	}
-		//	public void TimeSincePosted(BlogPost blogPost)
-		//	{
-		//		var timePosted = blogPost.PublishedAt;
-		//		//TimeSpan.FromMinutes(timePosted).Humanize(5);
-
-		//	}
+		
 	}
 }
