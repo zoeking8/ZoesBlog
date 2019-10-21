@@ -4,18 +4,15 @@
 	ViewData["Title"] = "Index";
 }
 
-	<form asp-page="./Index" method="get">
-		<div class="form-actions no-color">
-			<p>
-				Find by name:
-				<input type="text" name="SearchString" value="@Model.CurrentFilter" />
-				<input type="submit" value="Search" class="btn btn-primary" /> |
-				<a asp-page="./Index">Back to full List</a>
-			</p>
-		</div>
-	</form>
 
-@foreach (var blogPost in Model.AccessTags)
+<form>
+	<p>
+		Title: <input type="text" asp-for="SearchString" />
+		<input type="submit" value="Search" />
+	</p>
+</form>
+
+@foreach (var blogPost in Model.BlogPosts)
 {
 
 	<div>
@@ -43,28 +40,24 @@
 					</a>
 				}
 			}
+
 		</div>
 	</div>
 	<br>
-
 }
-
 @{
-	var prevDisabled = !Model.PageBlogPosts.HasPreviousPage ? "disabled" : "";
-	var nextDisabled = !Model.PageBlogPosts.HasNextPage ? "disabled" : "";
+	var prevDisabled = !Model.BlogPosts.HasPreviousPage ? "disabled" : "";
+	var nextDisabled = !Model.BlogPosts.HasNextPage ? "disabled" : "";
 }
 
 <a asp-page="./Index"
-   asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.PageBlogPosts.PageIndex - 1)"
-   asp-route-currentFilter="@Model.CurrentFilter"
+   asp-route-pageIndex="@(Model.BlogPosts.PageIndex - 1)"
    class="btn btn-primary @prevDisabled">
 	Previous
 </a>
 <a asp-page="./Index"
-   asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.PageBlogPosts.PageIndex + 1)"
-   asp-route-currentFilter="@Model.CurrentFilter"
+   asp-route-pageIndex="@(Model.BlogPosts.PageIndex + 1)"
    class="btn btn-primary @nextDisabled">
 	Next
 </a>
+

@@ -16,31 +16,26 @@ namespace ZoesBlog.Pages
 		private readonly BlogDbContext _blogDbContext;
 
 		
-		public IReadOnlyCollection<BlogPost> BlogPosts { get; private set; }
 
 
-		[BindProperty]
-		public List<AccessTag> AccessTags { get; private set; }
+		//[BindProperty]
+		//public List<AccessTag> AccessTags { get; private set; }
 
 		public IndexModel(BlogDbContext blogDbContext, ILogger<IndexModel> logger)
 		{
 			_blogDbContext = blogDbContext;
 			_logger = logger;
-			AccessTags = new List<AccessTag>();
+			//AccessTags = new List<AccessTag>();
 		}
 
-
-		public string TitleSort { get; set; }
-		public string DateSort { get; set; }
+		[BindProperty(SupportsGet = true)]
+		public string SearchString { get; set; }
 		public string CurrentFilter { get; set; }
-		public string CurrentSort { get; set; }
 
-		public PaginatedList<BlogPost> PageBlogPosts { get; set; }
-		public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
+
+		public PaginatedList<BlogPost> BlogPosts { get; set; }
+		public async Task OnGetAsync( int? pageIndex, string currentFilter, string searchString)
 		{
-			CurrentSort = sortOrder;
-			TitleSort = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
-			DateSort = sortOrder == "Date" ? "date_desc" : "Date";
 			if (searchString != null)
 			{
 				pageIndex = 1;
@@ -49,79 +44,53 @@ namespace ZoesBlog.Pages
 			{
 				searchString = currentFilter;
 			}
-
 			CurrentFilter = searchString;
-
 			IQueryable<BlogPost> blogPostsData = from bp in _blogDbContext.BlogPosts
+												 orderby bp.PublishedAt
 												 select bp;
-
-			if (!String.IsNullOrEmpty(searchString))
+			if (!string.IsNullOrEmpty(searchString))
 			{
 				blogPostsData = blogPostsData.Where(bp => bp.Title.Contains(searchString)
 									   || bp.Body.Contains(searchString));
 			}
-			switch (sortOrder)
-			{
-				case "title_desc":
-					blogPostsData = blogPostsData.OrderByDescending(bp => bp.Title);
-					break;
-				case "Date":
-					blogPostsData = blogPostsData.OrderBy(bp => bp.PublishedAt);
-					break;
-				case "date_desc":
-					blogPostsData = blogPostsData.OrderByDescending(bp => bp.PublishedAt);
-					break;
-				default:
-					blogPostsData = blogPostsData.OrderBy(bp => bp.Title);
-					break;
-			}
+		
 
-			int pageSize = 3;
-			PageBlogPosts = await PaginatedList<BlogPost>.CreateAsync(
-				blogPostsData.AsNoTracking(), pageIndex ?? 1, pageSize);
-			JoinTableData();
-			//return Page();
+			int pageSize = 10;
+			PaginatedList<BlogPost> paginatedList = BlogPosts = await PaginatedList<BlogPost>.CreateAsync(
+				blogPostsData.AsNoTracking().OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
+		
+			//JoinTableData();
 		}
 
 
-
-
-
-
-		//public IActionResult OnGet()
+		//private void JoinTableData()
 		//{
-		//	JoinTableData();
-		//	return Page();
+		//	AccessTags = _blogDbContext
+		//	   .BlogPosts
+		//	   .OrderByDescending(bp => bp.PublishedAt)
+		//	   .Select(blogPost => new AccessTag(blogPost.Title, blogPost.Body, blogPost.Tags, blogPost.PublishedAt, blogPost.Id)).ToList();
 		//}
 
 
-		private void JoinTableData()
-		{
-			AccessTags = _blogDbContext
-			   .BlogPosts
-			   //.OrderByDescending(bp => bp.PublishedAt)
-			   .Select(blogPost => new AccessTag(blogPost.Title, blogPost.Body, blogPost.Tags, blogPost.PublishedAt, blogPost.Id)).ToList();
-		}
+
+		//public class AccessTag
+		//{
+		//	public readonly string Title;
+		//	public readonly string Body;
+		//	public readonly IReadOnlyCollection<Tag> Tags;
+		//	public readonly DateTime PublishedAt;
+		//	public readonly Guid Id;
 
 
-
-		public class AccessTag
-		{
-			public readonly string Title;
-			public readonly string Body;
-			public readonly IReadOnlyCollection<Tag> Tags;
-			public readonly DateTime PublishedAt;
-			public readonly Guid Id;
-
-
-			public AccessTag(string title, string body, List<Tag> tags, DateTime publishedAt, Guid id)
-			{
-				Title = title;
-				Body = body;
-				Tags = tags;
-				PublishedAt = publishedAt;
-				Id = id;
-			}
-		}
+		//	public AccessTag(string title, string body, List<Tag> tags, DateTime publishedAt, Guid id)
+		//	{
+		//		Title = title;
+		//		Body = body;
+		//		Tags = tags;
+		//		PublishedAt = publishedAt;
+		//		Id = id;
+		//	}
+		
 	}
+
 }
