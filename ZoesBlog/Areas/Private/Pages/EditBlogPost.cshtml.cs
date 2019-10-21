@@ -20,6 +20,8 @@ namespace ZoesBlog.Areas.Private.Pages
 
 		[BindProperty]
 		public BlogPost BlogPost { get; set; }
+		[BindProperty]
+		public Guid BlogPostId { get; set; }
 
 
 		public async Task<IActionResult> OnPostAsync(Guid id)

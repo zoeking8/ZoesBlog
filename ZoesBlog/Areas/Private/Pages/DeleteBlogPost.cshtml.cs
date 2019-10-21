@@ -52,7 +52,7 @@ namespace ZoesBlog.Areas.Private.Pages
 				await _blogDbContext.SaveChangesAsync();
 			}
 
-			return RedirectToPage("./Admin");
+			return RedirectToPage("./Index");
 		}
 	}
 }
