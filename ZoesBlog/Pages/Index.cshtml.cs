@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ZoesBlog.Data;
 
@@ -14,7 +15,9 @@ namespace ZoesBlog.Pages
 		private readonly ILogger<IndexModel> _logger;
 		private readonly BlogDbContext _blogDbContext;
 
+		
 		public IReadOnlyCollection<BlogPost> BlogPosts { get; private set; }
+
 
 		[BindProperty]
 		public List<AccessTag> AccessTags { get; private set; }
@@ -26,19 +29,81 @@ namespace ZoesBlog.Pages
 			AccessTags = new List<AccessTag>();
 		}
 
-		public IActionResult OnGet()
+
+		public string TitleSort { get; set; }
+		public string DateSort { get; set; }
+		public string CurrentFilter { get; set; }
+		public string CurrentSort { get; set; }
+
+		public PaginatedList<BlogPost> PageBlogPosts { get; set; }
+		public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
 		{
+			CurrentSort = sortOrder;
+			TitleSort = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+			DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+			if (searchString != null)
+			{
+				pageIndex = 1;
+			}
+			else
+			{
+				searchString = currentFilter;
+			}
+
+			CurrentFilter = searchString;
+
+			IQueryable<BlogPost> blogPostsData = from bp in _blogDbContext.BlogPosts
+												 select bp;
+
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				blogPostsData = blogPostsData.Where(bp => bp.Title.Contains(searchString)
+									   || bp.Body.Contains(searchString));
+			}
+			switch (sortOrder)
+			{
+				case "title_desc":
+					blogPostsData = blogPostsData.OrderByDescending(bp => bp.Title);
+					break;
+				case "Date":
+					blogPostsData = blogPostsData.OrderBy(bp => bp.PublishedAt);
+					break;
+				case "date_desc":
+					blogPostsData = blogPostsData.OrderByDescending(bp => bp.PublishedAt);
+					break;
+				default:
+					blogPostsData = blogPostsData.OrderBy(bp => bp.Title);
+					break;
+			}
+
+			int pageSize = 3;
+			PageBlogPosts = await PaginatedList<BlogPost>.CreateAsync(
+				blogPostsData.AsNoTracking(), pageIndex ?? 1, pageSize);
 			JoinTableData();
-			return Page();
+			//return Page();
 		}
+
+
+
+
+
+
+		//public IActionResult OnGet()
+		//{
+		//	JoinTableData();
+		//	return Page();
+		//}
+
 
 		private void JoinTableData()
 		{
 			AccessTags = _blogDbContext
 			   .BlogPosts
-			   .OrderByDescending(bp => bp.PublishedAt)
+			   //.OrderByDescending(bp => bp.PublishedAt)
 			   .Select(blogPost => new AccessTag(blogPost.Title, blogPost.Body, blogPost.Tags, blogPost.PublishedAt, blogPost.Id)).ToList();
 		}
+
+
 
 		public class AccessTag
 		{
