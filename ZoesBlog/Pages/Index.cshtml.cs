@@ -15,7 +15,7 @@ namespace ZoesBlog.Pages
 		private readonly ILogger<IndexModel> _logger;
 		private readonly BlogDbContext _blogDbContext;
 
-		
+
 
 
 		//[BindProperty]
@@ -34,7 +34,8 @@ namespace ZoesBlog.Pages
 
 
 		public PaginatedList<BlogPost> BlogPosts { get; set; }
-		public async Task OnGetAsync( int? pageIndex, string currentFilter, string searchString)
+
+		public async Task OnGetAsync(int? pageIndex, string currentFilter, string searchString)
 		{
 			if (searchString != null)
 			{
@@ -53,12 +54,16 @@ namespace ZoesBlog.Pages
 				blogPostsData = blogPostsData.Where(bp => bp.Title.Contains(searchString)
 									   || bp.Body.Contains(searchString));
 			}
-		
-
 			int pageSize = 10;
 			PaginatedList<BlogPost> paginatedList = BlogPosts = await PaginatedList<BlogPost>.CreateAsync(
-				blogPostsData.AsNoTracking().OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
-		
+				blogPostsData.AsNoTracking().
+				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
+
+			foreach (var blogPost in _blogDbContext.BlogPosts.Include(t => t.Tags))
+			{
+				return;
+			}
+
 			//JoinTableData();
 		}
 
@@ -90,7 +95,9 @@ namespace ZoesBlog.Pages
 		//		PublishedAt = publishedAt;
 		//		Id = id;
 		//	}
-		
-	}
 
+		//}
+
+	}
+	
 }

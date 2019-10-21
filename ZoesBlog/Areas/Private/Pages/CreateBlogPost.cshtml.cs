@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Slugify;
 using ZoesBlog.Data;
 
+
 namespace ZoesBlog.Areas.Private.Pages
 {
     public class CreateBlogPostModel : PageModel
