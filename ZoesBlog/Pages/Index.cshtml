@@ -1,5 +1,6 @@
 ﻿@page
 @model IndexModel
+@using Humanizer
 @{
 	ViewData["Title"] = "Index";
 }
@@ -20,7 +21,7 @@
 		<h1>
 			<a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id">@blogPost.Title</a>
 		</h1>
-		<div>This post was published on: @blogPost.PublishedAt</div>
+		<div>This post was published: @blogPost.PublishedAt.Humanize()</div>
 		<div>@blogPost.Body</div>
 
 		<div>
