@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using ZoesBlog.Data;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks;
+
 
 namespace ZoesBlog
 {
@@ -17,43 +19,35 @@ namespace ZoesBlog
 	{
 		public static void Main(string[] args)
 		{
-			var host = CreateHostBuilder(args).Build();
+			Log.Logger = new LoggerConfiguration()
+		   .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+		   .Enrich.FromLogContext()
+		   .WriteTo.Console()
+		   .WriteTo.Seq(
+				Environment.GetEnvironmentVariable("SEQ_URL") ?? "http://localhost:5341")
+		   .CreateLogger();
 
-			using (var scope = host.Services.CreateScope())
+			try
 			{
-				var services = scope.ServiceProvider;
-
-				try
-				{
-					SeedData.Initialize(services);
-				}
-				catch (Exception ex)
-				{
-					var logger = services.GetRequiredService<ILogger<Program>>();
-					logger.LogError(ex, "An error occured seeding the DB.");
-				}
+				Log.Information("Starting up");
+				CreateHostBuilder(args).Build().Run();
 			}
-			host.Run();
+			catch (Exception ex)
+			{
+				Log.Fatal(ex, "Application start-up failed");
+			}
+			finally
+			{
+				Log.CloseAndFlush();
+			}
 		}
 
 		public static IHostBuilder CreateHostBuilder(string[] args) =>
 			Host.CreateDefaultBuilder(args)
+			.UseSerilog()
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder.UseStartup<Startup>();
-					//webBuilder.UseSerilog((hostingContext, loggerConfiguration) =>
-
-					//loggerConfiguration
-					//		.Enrich.FromLogContext()
-					//		.MinimumLevel.Is(hostingContext.Configuration.GetValue<LogEventLevel>("Serilog: LogEventLevel")));
-
-					//var seqUrl = "localhost:5341";
-
-					//loggerConfiguration.WriteTo.Seq;
-					//(
-					//	seqUrl,
-					//	apiKey:hostingContext.Configuration.GetValue
-					//)
 				});
 
 	}
