@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,9 +26,17 @@ namespace ZoesBlog
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddRazorPages();
 			services.AddDbContext<BlogDbContext>(options =>
 			   options.UseSqlServer(Configuration.GetConnectionString("ZoesBlog")));
+			
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+				.AddCookie(options => options.LoginPath = "/Login");
+
+			services.AddRazorPages()
+			.AddRazorPagesOptions(options =>
+			{
+				options.Conventions.AuthorizeAreaFolder("Private", "/");
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +58,7 @@ namespace ZoesBlog
 
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 			app.UseEndpoints(endpoints =>
 			{

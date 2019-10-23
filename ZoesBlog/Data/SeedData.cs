@@ -16,6 +16,28 @@ namespace ZoesBlog.Data
 			{
 				SlugHelper helper = new SlugHelper();
 
+				if (!context.Users.Any())
+				{
+					context.Users.AddRange
+					(
+						new User
+						{
+							Id = Guid.NewGuid(),
+							Email = "zoe.king@razor.co.uk",
+							Username = "Zoe1",
+							Password = BCrypt.Net.BCrypt.HashPassword("Zoe1811")
+						},
+						new User
+						{
+							Id = Guid.NewGuid(),
+							Email = "zoeking@live.co.uk",
+							Username = "Zoe2",
+							Password = BCrypt.Net.BCrypt.HashPassword("Zoe1811")
+						}
+
+					); 
+				}
+
 				if (!context.BlogPosts.Any())
 				{
 					context.BlogPosts.AddRange
