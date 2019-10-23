@@ -52,10 +52,6 @@ namespace ZoesBlog.Areas.Private.Pages
 				blogPostsData.AsNoTracking().
 				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
 		}
-		//public void OnGet()
-		//{
-		//	var newPostFirst = _blogDbContext.BlogPosts.OrderByDescending(bp => bp.PublishedAt).ToList();
-		//	BlogPosts = newPostFirst;
-		//}
+		
 	}
 }
