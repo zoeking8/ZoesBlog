@@ -28,32 +28,18 @@ namespace ZoesBlog.Pages
 			//AccessTags = new List<AccessTag>();
 		}
 
-		[BindProperty(SupportsGet = true)]
-		public string SearchString { get; set; }
-		public string CurrentFilter { get; set; }
+		
 
 
 		public PaginatedList<BlogPost> BlogPosts { get; set; }
 
-		public async Task OnGetAsync(int? pageIndex, string currentFilter, string searchString)
+		public async Task OnGetAsync(int? pageIndex)
 		{
-			if (searchString != null)
-			{
-				pageIndex = 1;
-			}
-			else
-			{
-				searchString = currentFilter;
-			}
-			CurrentFilter = searchString;
+			
 			IQueryable<BlogPost> blogPostsData = from bp in _blogDbContext.BlogPosts
 												 orderby bp.PublishedAt
 												 select bp;
-			if (!string.IsNullOrEmpty(searchString))
-			{
-				blogPostsData = blogPostsData.Where(bp => bp.Title.Contains(searchString)
-									   || bp.Body.Contains(searchString));
-			}
+			
 			int pageSize = 10;
 			PaginatedList<BlogPost> paginatedList = BlogPosts = await PaginatedList<BlogPost>.CreateAsync(
 				blogPostsData.AsNoTracking().

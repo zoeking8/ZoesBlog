@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ZoesBlog.Data
+namespace ZoesBlog
 {
-	public class Comment
+	public class CommentAccess
 	{
-		public Guid Id { get; set; }
-		public DateTime PublishedAt { get; set; }
 		public string Body { get; set; }
-		
+		public DateTime PublishedAt { get; set; }
 	}
 }
