@@ -21,17 +21,11 @@ namespace ZoesBlog
 		{
 			Log.Logger = new LoggerConfiguration()
 		   .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-		   .Enrich.WithProperty("Name","Zoe")
-		   .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("SEQ_ENV") ?? "Test")
-						 .Enrich.WithProperty("Component", Environment.GetEnvironmentVariable("SEQ_COMP") ?? "Blog")
 		   .Enrich.FromLogContext()
 		   .WriteTo.Console()
 		   .WriteTo.Seq(
 				Environment.GetEnvironmentVariable("SEQ_URL") ?? "http://localhost:5341")
-		   .WriteTo.Seq(serverUrl: Environment.GetEnvironmentVariable("SEQ_URL") ?? "http://localhost:5341",
-									   apiKey: Environment.GetEnvironmentVariable("SEQ_API_KEY"))
 		   .CreateLogger();
-
 
 			try
 			{

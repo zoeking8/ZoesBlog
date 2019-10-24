@@ -51,7 +51,7 @@ namespace ZoesBlog
 				app.UseHsts();
 			}
 			app.UseHttpsRedirection();
-			app.UseSerilogRequestLogging();
+			app.UseMiddleware<SerilogMiddleware>();
 			app.UseStaticFiles();
 
 			
