@@ -14,7 +14,7 @@ namespace ZoesBlog.Pages
 		private readonly BlogDbContext _blogDbContext;
 
 		public string Title { get; set; }
-		//public Guid BlogPostId { get; set; }
+
 		[BindProperty]
 		public CommentAccess CommentAccess { get; set; }
 		public IReadOnlyCollection<Comment> Comments { get; private set; }
@@ -46,7 +46,6 @@ namespace ZoesBlog.Pages
 			_blogDbContext.Comments.Add(new Comment
 			{
 				BlogPostId = id,
-				//Id = new Guid(),
 				Body = CommentAccess.Body,
 				PublishedAt = DateTime.Now
 			});
