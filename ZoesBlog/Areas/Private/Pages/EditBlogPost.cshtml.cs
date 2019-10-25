@@ -24,7 +24,7 @@ namespace ZoesBlog.Areas.Private.Pages
 		public Guid BlogPostId { get; set; }
 
 
-		public async Task<IActionResult> OnPostAsync(Guid id)
+		public async Task<IActionResult> OnGetAsync(Guid id)
 		{
 			if (id == null)
 			{
@@ -40,7 +40,7 @@ namespace ZoesBlog.Areas.Private.Pages
 			return Page();
 
 		}
-		public async Task<IActionResult> OnPostAsync()
+		public async Task<IActionResult> OnPost()
 		{
 			if (!ModelState.IsValid)
 			{
@@ -63,7 +63,7 @@ namespace ZoesBlog.Areas.Private.Pages
 					throw;
 				}
 			}
-			return RedirectToPage("./Admin");
+			return RedirectToPage("./Index");
 
 		}
 	}
