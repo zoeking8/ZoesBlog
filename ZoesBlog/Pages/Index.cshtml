@@ -29,7 +29,7 @@
 				{
 					<a class="badge badge-primary"
 					   asp-page="./IndividualBlogPost"
-					   asp-route-blogPostId="@tag.BlogPostId">
+					   asp-route-id="@tag.BlogPostId">
 						@tag.Name
 					</a>
 				}
@@ -38,20 +38,40 @@
 		</div>
 	</div>
 	<br>
+	<div class="comment-container">
+		@if (blogPost.Comments == null)
+		{
+			<div>
+				<p>This blog post has no comments</p>
+			</div>
+		}
+		else
+		{
+			@foreach (var comment in blogPost.Comments)
+			{
+				<div style="text-align: left">
+					<hr />
+					<p>@comment.Body</p>
+					<small>@comment.PublishedAt</small>
+				</div>
+			}
+		}
+	</div>
 }
+
 @{
 	var prevDisabled = !Model.BlogPosts.HasPreviousPage ? "disabled" : "";
 	var nextDisabled = !Model.BlogPosts.HasNextPage ? "disabled" : "";
 }
 
 <a asp-page="./Index"
-   asp-route-pageIndex="@(Model.BlogPosts.PageIndex - 1)"
-   class="btn btn-primary @prevDisabled">
+	asp-route-pageIndex="@(Model.BlogPosts.PageIndex - 1)"
+	class="btn btn-primary @prevDisabled">
 	Previous
 </a>
 <a asp-page="./Index"
-   asp-route-pageIndex="@(Model.BlogPosts.PageIndex + 1)"
-   class="btn btn-primary @nextDisabled">
+	asp-route-pageIndex="@(Model.BlogPosts.PageIndex + 1)"
+	class="btn btn-primary @nextDisabled">
 	Next
 </a>
 

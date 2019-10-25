@@ -10,8 +10,8 @@ using ZoesBlog.Data;
 namespace ZoesBlog.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20191018080409_TestTags")]
-    partial class TestTags
+    [Migration("20191024123046_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,28 @@ namespace ZoesBlog.Migrations
                     b.ToTable("BlogPosts");
                 });
 
+            modelBuilder.Entity("ZoesBlog.Data.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlogPostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PublishedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("ZoesBlog.Data.Tag", b =>
                 {
                     b.Property<Guid>("Id")
@@ -64,12 +86,41 @@ namespace ZoesBlog.Migrations
 
                     b.HasIndex("BlogPostId");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("ZoesBlog.Data.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ZoesBlog.Data.Comment", b =>
+                {
+                    b.HasOne("ZoesBlog.Data.BlogPost", "BlogPost")
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ZoesBlog.Data.Tag", b =>
                 {
-                    b.HasOne("ZoesBlog.Data.BlogPost", "blogPost")
+                    b.HasOne("ZoesBlog.Data.BlogPost", "BlogPost")
                         .WithMany("Tags")
                         .HasForeignKey("BlogPostId")
                         .OnDelete(DeleteBehavior.Cascade)

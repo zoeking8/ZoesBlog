@@ -24,40 +24,17 @@ namespace ZoesBlog.Data
 						{
 							Id = Guid.NewGuid(),
 							Email = "zoe.king@razor.co.uk",
-							Username = "Zoe1",
+							Username = "ZoeKing",
 							Password = BCrypt.Net.BCrypt.HashPassword("Zoe1811")
 						},
 						new User
 						{
 							Id = Guid.NewGuid(),
 							Email = "zoeking@live.co.uk",
-							Username = "Zoe2",
+							Username = "ZoeKing2",
 							Password = BCrypt.Net.BCrypt.HashPassword("Zoe1811")
 						}
-
 					); 
-				}
-
-				if (!context.BlogPosts.Any())
-				{
-					context.BlogPosts.AddRange
-					(
-						new BlogPost
-						{
-							Id = Guid.NewGuid(),
-							Title = "Hello World!",
-							Body = "This is my first blog post weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.",
-							PublishedAt = DateTime.UtcNow,
-							Tags = new List<Tag>{new Tag
-							{
-							Id = Guid.NewGuid(),
-							Name = "Tag Test",
-							UrlSlug = helper.GenerateSlug("Tag Test")
-
-						}   }
-						}
-						
-					);
 				}
 
 				context.SaveChanges();

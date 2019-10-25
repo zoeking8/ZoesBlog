@@ -19,17 +19,39 @@ namespace ZoesBlog
 	{
 		public static void Main(string[] args)
 		{
+			var host = CreateHostBuilder(args).Build();
+
+			using (var scope = host.Services.CreateScope())
+			{
+				var services = scope.ServiceProvider;
+
+				try
+				{
+					SeedData.Initialize(services);
+				}
+				catch (Exception ex)
+				{
+					var logger = services.GetRequiredService<ILogger<Program>>();
+					logger.LogError(ex, "An error occurred seeding the DB.");
+				}
+			}
+
+			var configuration = new ConfigurationBuilder()
+							   .AddJsonFile("appsettings.json")
+							   .Build();
+			var setting = configuration.GetValue<string>("Logging:LogLevel:Default");
+
 			Log.Logger = new LoggerConfiguration()
 		   .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
 		   .Enrich.WithProperty("Name","Zoe")
-		   .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("SEQ_ENV") ?? "Test")
-						 .Enrich.WithProperty("Component", Environment.GetEnvironmentVariable("SEQ_COMP") ?? "Blog")
+		   .Enrich.WithProperty("Environment", configuration.GetValue<string>("Environment"))
+		   .Enrich.WithProperty("Component", configuration.GetValue<string>("Component"))
+		   .ReadFrom.Configuration(configuration)
 		   .Enrich.FromLogContext()
 		   .WriteTo.Console()
-		   .WriteTo.Seq(
-				Environment.GetEnvironmentVariable("SEQ_URL") ?? "http://localhost:5341")
-		   .WriteTo.Seq(serverUrl: Environment.GetEnvironmentVariable("SEQ_URL") ?? "http://localhost:5341",
-									   apiKey: Environment.GetEnvironmentVariable("SEQ_API_KEY"))
+		  .Enrich.FromLogContext()
+		   .WriteTo.Seq(serverUrl: configuration.GetValue<string>("Logging:Seq:Url"),
+									   apiKey: configuration.GetValue<string>("Logging:Seq:ApiKey"))
 		   .CreateLogger();
 
 
