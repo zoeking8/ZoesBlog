@@ -66,5 +66,6 @@ namespace ZoesBlog.Areas.Private.Pages
 			return RedirectToPage("./Index");
 
 		}
+		
 	}
 }

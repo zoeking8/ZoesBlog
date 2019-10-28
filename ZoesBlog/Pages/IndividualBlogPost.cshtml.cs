@@ -13,8 +13,8 @@ namespace ZoesBlog.Pages
 	{
 		private readonly BlogDbContext _blogDbContext;
 
-		public string Title { get; set; }
-
+		[BindProperty]
+		public Guid BlogPostId { get; set; }
 		[BindProperty]
 		public CommentAccess CommentAccess { get; set; }
 		public IReadOnlyCollection<Comment> Comments { get; private set; }
@@ -37,6 +37,9 @@ namespace ZoesBlog.Pages
 			{
 				return NotFound();
 			}
+			var commentList = _blogDbContext.Comments.Where(x => x.BlogPostId == id).ToList();
+			commentList.Reverse();
+			Comments = commentList;
 
 			return Page();
 

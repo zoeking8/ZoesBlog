@@ -19,6 +19,7 @@
 		<tr>
 			<th scope="col">Blog Post Title</th>
 			<th scope="col">Published At</th>
+			<th scope="col">View Comments</th>
 			<th scope="col">Edit</th>
 			<th scope="col">Delete</th>
 		</tr>
@@ -29,7 +30,9 @@
 			<tr>
 				<td>@blogPost.Title</td>
 				<td>@blogPost.PublishedAt</td>
-
+				<td>
+					<a class="btn btn-lg" asp-area="Private" asp-page="./ViewComments" asp-route-id="@blogPost.Id"> <i class="fa fa-comment"></i></a>
+				</td>
 				<td>
 					<a class="btn btn-lg" asp-area="Private" asp-page="./EditBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-edit"></i></a>
 				</td>

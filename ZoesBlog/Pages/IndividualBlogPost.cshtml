@@ -14,11 +14,21 @@
 
 	</div>
 </p>
-
+<div class="comment-container">
+	<h3>Comments:</h3>
+	@foreach (var comment in Model.Comments)
+	{
+		<div style="text-align: left">
+			<hr />
+			<p>@comment.Body</p>
+			<small>@comment.PublishedAt</small>
+		</div>
+	}
+</div>
 <form class="justify-content-center" method="post">
 	<div class="form-group">
 		<label>
-			Comment:
+			Add Comment:
 			<textarea asp-for="CommentAccess.Body" aria-describedby="usernameHelp" class="form-control" placeholder="Comment" type="text"></textarea>
 		</label>
 		<br />
