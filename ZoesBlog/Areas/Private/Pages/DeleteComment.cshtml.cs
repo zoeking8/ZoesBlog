@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ZoesBlog.Data;
 
@@ -17,34 +18,42 @@ namespace ZoesBlog.Areas.Private.Pages
 		{
 			_blogDbContext = blogDbContext;
 		}
+
 		[BindProperty]
-		public Guid BlogPostId { get; set; }
-		[BindProperty]
-		public Comment Comments { get; set; }
-		public IActionResult OnGet(Guid blogPostId)
+		public Comment Comment { get; set; }
+
+		public async Task<IActionResult> OnGetAsync(Guid id)
 		{
-			BlogPostId = blogPostId;
-			Comments = _blogDbContext.Comments.FirstOrDefault(x => x.Id == blogPostId);
+			if (id == null)
+			{
+				return NotFound();
+			}
+
+			Comment = await _blogDbContext.Comments.FirstOrDefaultAsync(c => c.Id == id);
+
+			if (Comment == null)
+			{
+				return NotFound();
+			}
 			return Page();
 		}
-		public async Task<IActionResult> OnPost()
+
+		public async Task<IActionResult> OnPostAsync(Guid id)
 		{
-			if (!ModelState.IsValid)
+			if (id == null)
 			{
-				return Page();
+				return NotFound();
 			}
 
-			await using (_blogDbContext)
-			{
-				var comment = _blogDbContext.Comments.FirstOrDefault(c => c.Id == BlogPostId);
+			Comment = await _blogDbContext.Comments.FindAsync(id);
 
-				if (comment != null)
-				{
-					_blogDbContext.Comments.RemoveRange(comment);
-					await _blogDbContext.SaveChangesAsync();
-				}
+			if (Comment != null)
+			{
+				_blogDbContext.Comments.Remove(Comment);
+				await _blogDbContext.SaveChangesAsync();
 			}
-			return RedirectToPage("/Index");
+
+			return RedirectToPage("./Index");
 		}
 	}
 }

@@ -64,29 +64,7 @@
 </div>
 }
 
-@foreach (var blogPost in Model.BlogPosts)
-{
-	<br>
-	<div class="comment-container">
-		@if (blogPost.Comments == null)
-		{
-			<div>
-				<p>This blog post has no comments</p>
-			</div>
-		}
-		else
-		{
-			@foreach (var comment in blogPost.Comments)
-			{
-				<div style="text-align: left">
-					<hr />
-					<p>@comment.Body</p>
-					<small>@comment.PublishedAt</small>
-				</div>
-			}
-		}
-	</div>
-}
+
 
 @{
 	var prevDisabled = !Model.BlogPosts.HasPreviousPage ? "disabled" : "";

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ZoesBlog.Data;
 
-namespace ZoesBlog.Pages
+namespace ZoesBlog.Areas.Private.Pages
 {
-    public class IndividualBlogPostModel : PageModel
-	{
+    public class ViewCommentsModel : PageModel
+    {
+		
 		private readonly BlogDbContext _blogDbContext;
 
 		[BindProperty]
@@ -19,7 +20,7 @@ namespace ZoesBlog.Pages
 		public CommentAccess CommentAccess { get; set; }
 		public IReadOnlyCollection<Comment> Comments { get; private set; }
 
-		public IndividualBlogPostModel(BlogDbContext blogDbContext)
+		public ViewCommentsModel(BlogDbContext blogDbContext)
 		{
 			_blogDbContext = blogDbContext;
 		}
@@ -37,23 +38,12 @@ namespace ZoesBlog.Pages
 			{
 				return NotFound();
 			}
-			var commentList = _blogDbContext.Comments.Where(c => c.BlogPostId == id).ToList();
+			var commentList = _blogDbContext.Comments.Where(x => x.BlogPostId == id).ToList();
 			commentList.Reverse();
 			Comments = commentList;
 
 			return Page();
-
 		}
-		public async Task<IActionResult> OnPostAsync(Guid id)
-		{
-			_blogDbContext.Comments.Add(new Comment
-			{
-				BlogPostId = id,
-				Body = CommentAccess.Body,
-				PublishedAt = DateTime.Now
-			});
-			await _blogDbContext.SaveChangesAsync();
-			return RedirectToPage("./IndividualBlogPost", new {id});
-		}
+			
 	}
 }

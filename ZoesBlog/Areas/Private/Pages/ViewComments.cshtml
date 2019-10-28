@@ -1,0 +1,37 @@
+﻿@page
+@model ZoesBlog.Areas.Private.Pages.ViewCommentsModel
+@using Humanizer
+@{
+	Layout = "_AdminLayout";
+}
+
+<p>
+	<div>
+		<h1>Comments for blog post: @Model.BlogPost.Title</h1>
+		<small>This post was published: @Model.BlogPost.PublishedAt.Humanize()</small>
+	</div>
+</p>
+<br />
+<div class="comment-container">
+	<h4>Comments:</h4>
+	@if (Model.BlogPost.Comments == null)
+	{
+		<div>
+			<p>This blog post has no comments</p>
+		</div>
+	}
+	else
+		@foreach (var comment in Model.Comments)
+
+		{
+			<div style="text-align: left">
+				<hr />
+				<p>@comment.Body</p>
+				<small>@comment.PublishedAt</small>
+			</div>
+
+			<form method="post">
+				<a class="btn btn-danger" asp-area="Private" asp-page="./DeleteComment" asp-route-id="@comment.Id"> Delete Comment</a>
+			</form>
+		}
+</div>

@@ -1,10 +1,12 @@
-﻿@page
+﻿@page 
 @model ZoesBlog.Areas.Private.Pages.DeleteCommentModel
 @{
+	Layout = "_AdminLayout";
+
 }
-<h3>Are you sure you want to delete this comment: @Model.Comments.Body? Once it has been deleted it cannot be recovered.</h3>
+<h3>Are you sure you want to delete this comment: "@Model.Comment.Body"? Once it has been deleted it cannot be recovered.</h3>
 <form method="post">
-	<input type="hidden" asp-for="@Model.Comments.Id" />
+	<input type="hidden" asp-for="@Model.Comment.Id" />
 	<input type="submit" value="Delete" class="btn btn-danger" /> |
 	<a asp-area="Private" asp-page="./Index">Cancel</a>
 </form>
