@@ -33,6 +33,7 @@ namespace ZoesBlog.Pages
 												 orderby bp.PublishedAt
 												 select bp;
 
+
 			int pageSize = 10;
 			PaginatedList<BlogPost> paginatedList = BlogPosts = await PaginatedList<BlogPost>.CreateAsync(
 				blogPostsData.AsNoTracking().
@@ -44,5 +45,7 @@ namespace ZoesBlog.Pages
 		//	Tags = tagList;
 		//	return Page();
 		//}
+
+		
 	}
 }
