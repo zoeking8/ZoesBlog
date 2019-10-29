@@ -43,11 +43,16 @@ namespace ZoesBlog.Areas.Private.Pages
 			var readingTimeInMinutes = Math.Floor(wordCount / 228d) + 1;
 			blogPost.TimeToRead = readingTimeInMinutes;
 
-			SlugHelper helper = new SlugHelper();
 
-			var tagList = UserBlogPost.Tags.Split(",")
-				.Where(t => !string.IsNullOrEmpty(t));
+			var tagList = new string[] { };
+			if (!string.IsNullOrEmpty(UserBlogPost.Tags))
+			{
+				tagList = UserBlogPost.Tags.Split(",");
+				
+			}
 			var tags = new List<Tag>();
+
+			SlugHelper helper = new SlugHelper();
 
 			foreach (var userTag in tagList)
 			{

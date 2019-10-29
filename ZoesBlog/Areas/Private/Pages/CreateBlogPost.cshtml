@@ -6,27 +6,28 @@
 }
 
 
-<form method="post">
-	<div class="form-group">
-		<label>
-			Title
-			<textarea rows="2" cols="60" asp-for="UserBlogPost.Title" type="text" class="form-control" aria-describedby="titleHelp" placeholder="Title"></textarea>
-		</label>
-		<small id="titleHelp" class="form-text text-muted">The title of the blog post</small>
-	</div>
-	<div class="form-group">
-		<label>
-			Body
-			<textarea rows="10" cols="100" asp-for="UserBlogPost.Body" type="text" class="form-control" aria-describedby="bodyHelp" placeholder="Body"></textarea>
-		</label>
-		<small id="bodyHelp" class="form-text text-muted">The body of the blog post</small>
-	</div>
-	<div class="form-group">
-		<label>
-			Tags
-			<textarea rows="2" cols="40" asp-for="UserBlogPost.Tags" type="text" class="form-control" aria-describedby="tagHelp" placeholder="tags"></textarea>
-		</label>
-		<small id="tagHelp" class="form-text text-muted">To Add multiple tags, seperate each tag with a comma.</small>
-	</div>
-	<button type="submit" class="btn btn-primary">Create</button>
-</form>
+	<form method="post">
+		<div class="form-group">
+			<label>
+				Title
+				<textarea rows="2" cols="60" asp-for="UserBlogPost.Title" type="text" class="form-control" aria-describedby="titleHelp" placeholder="Title"></textarea>
+			</label>
+			<small id="titleHelp" class="form-text text-muted">The title of the blog post</small>
+		</div>
+		<div class="form-group">
+			<label>
+				Body
+				<textarea rows="10" cols="100" asp-for="UserBlogPost.Body" type="text" class="form-control" aria-describedby="bodyHelp" placeholder="Body"></textarea>
+			</label>
+			<small id="bodyHelp" class="form-text text-muted">The body of the blog post</small>
+		</div>
+		<div class="form-group">
+			<label>
+				Tags
+				<textarea rows="2" cols="40" asp-for="UserBlogPost.Tags" type="text" class="form-control" aria-describedby="tagHelp" placeholder="tags"></textarea>
+			</label>
+			<small id="tagHelp" class="form-text text-muted">To add multiple tags, seperate each tag with a comma.</small>
+		</div>
+		<button type="submit" class="btn btn-primary">Create</button>
+		<a asp-area="Private" asp-page="./Index">Cancel</a>
+	</form>

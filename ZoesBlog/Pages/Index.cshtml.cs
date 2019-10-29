@@ -39,13 +39,8 @@ namespace ZoesBlog.Pages
 				blogPostsData.AsNoTracking().
 				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
 		}
-		//public IActionResult OnGet(Guid id)
-		//{
-		//	var tagList = _blogDbContext.Tags.Where(t => t.BlogPostId == id).ToList();
-		//	Tags = tagList;
-		//	return Page();
-		//}
-
 		
+
+
 	}
 }

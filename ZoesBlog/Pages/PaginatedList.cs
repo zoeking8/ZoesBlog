@@ -16,7 +16,7 @@ namespace ZoesBlog.Pages
 			PageIndex = pageIndex;
 			TotalPages = (int)Math.Ceiling(count / (double)pageSize);
 
-			this.AddRange(items);
+			AddRange(items);
 		}
 
 		public bool HasPreviousPage
@@ -44,7 +44,5 @@ namespace ZoesBlog.Pages
 				.Take(pageSize).ToListAsync();
 			return new PaginatedList<T>(items, count, pageIndex, pageSize);
 		}
-
-		
 	}
 }

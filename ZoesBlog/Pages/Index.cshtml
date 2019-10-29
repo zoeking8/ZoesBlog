@@ -44,27 +44,15 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="panel-body">
 							@blogPost.Body
 						</div>
 
 						<div class="panel-footer">
-							@if (blogPost.Tags == null)
-							{
-								<span class="label label-default">This Blogpost has no Tags </span>
-							}
-							else
-							{
-								@foreach (var tag in blogPost.Tags)
-								{
-									<span class="label label-default">@tag.Name</span>
-								}
-							}
+							<div class="text-center"><a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id"> Read More</a></div>
 						</div>
 					</div>
 				</div>
-				<div class="text-center"><a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id"> Read More</a></div>
 			</div>
 			<div class="col-md-1"></div>
 			<div class="col-md-3">

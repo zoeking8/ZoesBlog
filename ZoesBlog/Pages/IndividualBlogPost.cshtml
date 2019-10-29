@@ -12,8 +12,19 @@
 		<div>Time to Read: @Model.BlogPost.TimeToRead Minutes</div>
 		<br />
 		<div>@Model.BlogPost.Body</div>
-		<div>@Model.BlogPost.Tags</div>
-
+		<div class="panel-footer">
+			@if (Model.BlogPost.Tags == null)
+			{
+				<span class="label label-default">This Blogpost has no Tags </span>
+			}
+			else
+			{
+				@foreach (var tag in Model.BlogPost.Tags)
+				{
+					<span class="label label-default">@tag.Name</span>
+				}
+			}
+		</div>
 	</div>
 </p>
 <br />
@@ -45,5 +56,8 @@
 		</label>
 		<br />
 		<button class="btn btn-primary" type="submit">Submit</button>
+	</div>
+	<div>
+		<a asp-page="./Index">Back to Blog Posts</a>
 	</div>
 </form>

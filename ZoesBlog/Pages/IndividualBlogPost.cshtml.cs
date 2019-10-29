@@ -18,6 +18,8 @@ namespace ZoesBlog.Pages
 		[BindProperty]
 		public CommentAccess CommentAccess { get; set; }
 		public IReadOnlyCollection<Comment> Comments { get; private set; }
+		public IReadOnlyCollection<Tag> Tags { get; private set; }
+
 
 		public IndividualBlogPostModel(BlogDbContext blogDbContext)
 		{
@@ -38,8 +40,12 @@ namespace ZoesBlog.Pages
 				return NotFound();
 			}
 			var commentList = _blogDbContext.Comments.Where(c => c.BlogPostId == id).ToList();
-			commentList.Reverse();
+			commentList.OrderByDescending(bp => bp.PublishedAt);
 			Comments = commentList;
+			
+			var tagList = _blogDbContext.Tags.Where(t => t.BlogPostId == id).ToList();
+			Tags = tagList;
+			
 
 			return Page();
 
