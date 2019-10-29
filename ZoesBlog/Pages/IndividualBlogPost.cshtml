@@ -1,10 +1,10 @@
-﻿@page 
+﻿@page
+
 @model ZoesBlog.Pages.IndividualBlogPostModel
 @using Humanizer
 @{
 	ViewData["Title"] = "BlogPost";
 }
-
 <p>
 	<div>
 		<h1>@Model.BlogPost.Title</h1>
@@ -18,20 +18,20 @@
 	<h4>Comments:</h4>
 	@if (Model.BlogPost.Comments == null)
 	{
-	<div>
-		<p>This blog post has no comments</p>
-	</div>
-	}
-	else
-	@foreach (var comment in Model.Comments)
-
-	{
-		<div style="text-align: left">
-			<hr />
-			<p>@comment.Body</p>
-			<small>@comment.PublishedAt</small>
+		<div>
+			<p>This blog post has no comments</p>
 		</div>
 	}
+	else
+		@foreach (var comment in Model.Comments)
+
+		{
+			<div style="text-align: left">
+				<hr />
+				<p>@comment.Body</p>
+				<small>@comment.PublishedAt</small>
+			</div>
+		}
 </div>
 <form class="justify-content-center" method="post">
 	<div class="form-group">

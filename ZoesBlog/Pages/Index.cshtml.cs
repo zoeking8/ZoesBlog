@@ -15,6 +15,9 @@ namespace ZoesBlog.Pages
 		private readonly ILogger<IndexModel> _logger;
 		private readonly BlogDbContext _blogDbContext;
 
+		[BindProperty]
+		public Guid BlogPostId { get; set; }
+		public IReadOnlyCollection<Tag> Tags { get; private set; }
 		public PaginatedList<BlogPost> BlogPosts { get; set; }
 
 		public IndexModel(BlogDbContext blogDbContext, ILogger<IndexModel> logger)
@@ -35,25 +38,11 @@ namespace ZoesBlog.Pages
 				blogPostsData.AsNoTracking().
 				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
 		}
-		//public async Task<IActionResult> OnPostAsync()
+		//public IActionResult OnGet(Guid id)
 		//{
-
-		//	if (!ModelState.IsValid)
-		//	{
-		//		return Page();
-		//	}
-		//	var blogPost = new BlogPost();
-		//	_blogDbContext.Comments.Add(new Comment
-		//	{
-		//		BlogPostId = blogPost.Id,
-		//		Id = new Guid(),
-		//		Body = CommentAccess.Body,
-		//		PublishedAt = DateTime.UtcNow
-		//	});
-		//	await _blogDbContext.SaveChangesAsync();
-		//	return RedirectToPage("");
-
+		//	var tagList = _blogDbContext.Tags.Where(t => t.BlogPostId == id).ToList();
+		//	Tags = tagList;
+		//	return Page();
 		//}
-
 	}
 }
