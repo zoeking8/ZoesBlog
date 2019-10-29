@@ -74,19 +74,5 @@ namespace ZoesBlog.Areas.Private.Pages
 			public string Body { get; set; }
 			public string Tags { get; set; }
 		}
-
-
-		//public void TimeSincePosted(BlogPost blogPost)
-		//{
-		//	var timePosted = blogPost.PublishedAt;
-		//	//TimeSpan.FromMinutes(timePosted).Humanize(5);
-
-		//}
-		//public double ReadTime(BlogPost blogPost)
-		//{
-		//	var wordCount = blogPost.Body.Split(" ").Length;
-		//	var readingTimeInMinutes = Math.Floor(wordCount / 228d) + 1;
-		//	return readingTimeInMinutes;
-		//}
 	}
 }

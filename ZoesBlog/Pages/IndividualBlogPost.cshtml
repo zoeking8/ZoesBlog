@@ -8,12 +8,15 @@
 <p>
 	<div>
 		<h1>@Model.BlogPost.Title</h1>
-		<div>@Model.BlogPost.PublishedAt.Humanize()</div>
+		<div>Published: @Model.BlogPost.PublishedAt.Humanize()</div>
+		<div>Time to Read: @Model.BlogPost.TimeToRead Minutes</div>
+		<br />
 		<div>@Model.BlogPost.Body</div>
 		<div>@Model.BlogPost.Tags</div>
 
 	</div>
 </p>
+<br />
 <div class="comment-container">
 	<h4>Comments:</h4>
 	@if (Model.BlogPost.Comments == null)
@@ -33,11 +36,12 @@
 			</div>
 		}
 </div>
+<br />
 <form class="justify-content-center" method="post">
 	<div class="form-group">
 		<label>
 			Add Comment:
-			<textarea asp-for="CommentAccess.Body" aria-describedby="usernameHelp" class="form-control" placeholder="Comment" type="text"></textarea>
+			<textarea rows="3" cols="80" asp-for="CommentAccess.Body" aria-describedby="usernameHelp" class="form-control" placeholder="Comment" type="text"></textarea>
 		</label>
 		<br />
 		<button class="btn btn-primary" type="submit">Submit</button>
