@@ -16,21 +16,37 @@ namespace ZoesBlog.Pages
 		public Tag Tag { get; private set; }
 		public string UrlSlug { get; set; }
 		public List<BlogPost> BlogPosts { get; set; }
+		public List<TagCloudTag> TagCloud { get; private set; }
 		public TagCloudModel(BlogDbContext blogDbContext)
 		{
 			_blogDbContext = blogDbContext;
 		}
-		//public ActionResult Index()
-		//{
-		//	var phrases = new string[] { _blogDbContext.BlogPosts };
-		//	var model = new TagCloudAnalyzer()
-		//		.ComputeTagCloud(phrases)
-		//		.Shuffle();
-		//	return Page();
-		//}
+
+		
+		private List<TagCloudTag> GenerateTagCloud()
+		{
+			var analyzer = new TagCloudAnalyzer();
+
+			var blogPostTags = _blogDbContext
+							   .Tags
+							   .Select(t => t.Name)
+							   .ToList();
+
+
+			var tags = analyzer.ComputeTagCloud(blogPostTags);
+
+			tags = tags.Shuffle();
+			return tags.ToList();
+		}
+		public IActionResult OnGet()
+		{
+			TagCloud = GenerateTagCloud();
+			return Page();
+
+		}
 
 		//public void OnGet()
-  //      {
+		//      {
 		//	var analyzer = new TagCloudAnalyzer();
 
 		//	// blogPosts is an IEnumerable<String>, loaded from
@@ -41,5 +57,5 @@ namespace ZoesBlog.Pages
 		//	// display
 		//	tags = tags.Shuffle();
 		//}
-    }
+	}
 }

@@ -20,7 +20,7 @@ namespace ZoesBlog.Pages
 		public string UrlSlug { get; set; }
 		public List<BlogPost> BlogPostList { get; private set; }
 		public Tag Tags { get; private set; }
-
+		
 
 		public TagListModel(BlogDbContext blogDbContext)
 		{
@@ -33,11 +33,10 @@ namespace ZoesBlog.Pages
 			var blogPosts = _blogDbContext.Tags
 				.Where(t => t.UrlSlug == urlSlug)
 				.Select(t => t.BlogPost).ToList();
-
 			BlogPostList = blogPosts;
+
 			return Page();
 
 		}
-		
 	}
 }
