@@ -1,0 +1,53 @@
+﻿@page
+@model ZoesBlog.Pages.TagListModel
+@using Humanizer
+@{
+	ViewData["Title"] = "TagList";
+	Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Tag List</h1>
+@foreach (var blogPost in Model.BlogPostList)
+{
+	<div class="container">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				<div id="postlist">
+					<div class="panel">
+						<div class="panel-heading">
+							<div class="text-center">
+								<div class="row">
+									<div class="col-sm-9">
+										<h1 class="pull-left">@blogPost.Title</h1>
+									</div>
+									<div class="col-sm-3">
+										<h4 class="pull-right">
+											<small><em>Post Published: @blogPost.PublishedAt.Humanize()</em></small>
+										</h4>
+										<h4 class="pull-right">
+											<small><em>Time to read: @blogPost.TimeToRead minutes</em></small>
+										</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							@blogPost.Body
+						</div>
+
+						<div class="panel-footer">
+							<div class="text-center"><a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id"> Read More</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-1">
+			</div>
+		</div>
+	</div>
+	<br />
+}

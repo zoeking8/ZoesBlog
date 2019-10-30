@@ -45,7 +45,6 @@ namespace ZoesBlog.Pages
 			
 			var tagList = _blogDbContext.Tags.Where(t => t.BlogPostId == id).ToList();
 			Tags = tagList;
-			
 
 			return Page();
 

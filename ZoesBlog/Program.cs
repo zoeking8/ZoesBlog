@@ -54,7 +54,6 @@ namespace ZoesBlog
 									   apiKey: configuration.GetValue<string>("Logging:Seq:ApiKey"))
 		   .CreateLogger();
 
-
 			try
 			{
 				Log.Information("Starting up");
@@ -77,6 +76,5 @@ namespace ZoesBlog
 				{
 					webBuilder.UseStartup<Startup>();
 				});
-
 	}
 }

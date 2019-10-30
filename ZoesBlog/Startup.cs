@@ -54,8 +54,6 @@ namespace ZoesBlog
 			app.UseSerilogRequestLogging();
 			app.UseStaticFiles();
 
-			
-
 			app.UseRouting();
 
 			app.UseAuthentication();

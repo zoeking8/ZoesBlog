@@ -2,6 +2,7 @@
 
 @model ZoesBlog.Pages.IndividualBlogPostModel
 @using Humanizer
+@using HeyRed.MarkdownSharp
 @{
 	ViewData["Title"] = "BlogPost";
 }
@@ -15,13 +16,15 @@
 		<div class="panel-footer">
 			@if (Model.BlogPost.Tags == null)
 			{
-				<span class="label label-default">This Blogpost has no Tags </span>
+				<span class="label label-default">This Blog Post has no Tags </span>
 			}
 			else
 			{
 				@foreach (var tag in Model.BlogPost.Tags)
 				{
-					<span class="label label-default">@tag.Name</span>
+					<span> 
+						<span><a asp-page="./TagList" asp-route-urlSlug="@tag.UrlSlug"class="label label-default">@tag.UrlSlug</a></span>
+					</span>
 				}
 			}
 		</div>

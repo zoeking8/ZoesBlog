@@ -48,14 +48,16 @@
 	var prevDisabled = !Model.BlogPosts.HasPreviousPage ? "disabled" : "";
 	var nextDisabled = !Model.BlogPosts.HasNextPage ? "disabled" : "";
 }
+<div style="text-align: center">
 
-<a asp-page="./Index"
-   asp-route-pageIndex="@(Model.BlogPosts.PageIndex - 1)"
-   class="btn btn-primary @prevDisabled">
-	Previous
-</a>
-<a asp-page="./Index"
-   asp-route-pageIndex="@(Model.BlogPosts.PageIndex + 1)"
-   class="btn btn-primary @nextDisabled">
-	Next
-</a>
+	<a asp-page="./Index"
+	   asp-route-pageIndex="@(Model.BlogPosts.PageIndex - 1)"
+	   class="btn btn-primary @prevDisabled">
+		Previous
+	</a>
+	<a asp-page="./Index"
+	   asp-route-pageIndex="@(Model.BlogPosts.PageIndex + 1)"
+	   class="btn btn-primary @nextDisabled">
+		Next
+	</a>
+</div>

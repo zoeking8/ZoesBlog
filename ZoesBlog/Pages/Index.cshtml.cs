@@ -39,8 +39,5 @@ namespace ZoesBlog.Pages
 				blogPostsData.AsNoTracking().
 				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
 		}
-		
-
-
 	}
 }
