@@ -8,9 +8,4 @@
 
 <h1>TagCloud</h1>
 
-<div class="tag tag-cloud">
-		@foreach (var tag in Model.TagCloud)
-		{
-			<span class="tag kind-@tag.Text"></span>
-		}
-	</div>
+ @Model.Tags

@@ -4,9 +4,11 @@
 @using HeyRed.MarkdownSharp
 @{
 	ViewData["Title"] = "Index";
+
 	var options = new MarkdownOptions
 	{
 		AutoHyperlink = true,
+		AutoNewLines = true,
 		LinkEmails = true,
 		QuoteSingleLine = true,
 		StrictBoldItalic = true
@@ -45,7 +47,7 @@
 							</div>
 						</div>
 						<div class="panel-body">
-							@blogPost.Body
+							@Html.Raw(mark.Transform(blogPost.Body))
 						</div>
 
 						<div class="panel-footer">

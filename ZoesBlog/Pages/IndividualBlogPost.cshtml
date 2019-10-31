@@ -5,6 +5,15 @@
 @using HeyRed.MarkdownSharp
 @{
 	ViewData["Title"] = "BlogPost";
+	 var options = new MarkdownOptions
+    {
+        AutoHyperlink = true,
+        AutoNewLines = true,
+        LinkEmails = true,
+        QuoteSingleLine = true,
+        StrictBoldItalic = true
+    };
+    var mark = new Markdown(options);
 }
 	<p>
 			<div style="text-align: right">
@@ -12,11 +21,11 @@
 				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 			</div>
 			<div>
-				<h1>@Model.BlogPost.Title</h1>
+				<h1>@Html.Raw(mark.Transform(Model.BlogPost.Title))</h1>
 				<div>Published: @Model.BlogPost.PublishedAt.Humanize()</div>
 				<div>Time to Read: @Model.BlogPost.TimeToRead Minutes</div>
 				<br />
-				<div>@Model.BlogPost.Body</div>
+				<div>@Html.Raw(mark.Transform(Model.BlogPost.Body))</div>
 				<div class="panel-footer">
 					@if (Model.BlogPost.Tags == null)
 					{
