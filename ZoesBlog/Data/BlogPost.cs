@@ -16,6 +16,5 @@ namespace ZoesBlog.Data
 		public List<Comment> Comments { get; set; }
 		public double TimeToRead { get; set; }
 		public string Snippet { get; set; }
-
 	}
 }

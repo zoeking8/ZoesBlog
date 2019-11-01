@@ -43,8 +43,8 @@ namespace ZoesBlog.Areas.Private.Pages
 			var readingTimeInMinutes = Math.Floor(wordCount / 228d) + 1;
 			blogPost.TimeToRead = readingTimeInMinutes;
 
-			var blogSnippet = blogPost.Body.Split(" ").Take(150).ToString();
-			blogPost.Snippet = blogSnippet;
+			
+			blogPost.Snippet = string.Join(" ", blogPost.Body.Split().Take(150).Append("..."));
 
 
 			var tagList = new string[] { };
