@@ -26,17 +26,17 @@
 				<div>Time to Read: @Model.BlogPost.TimeToRead Minutes</div>
 				<br />
 				<div>@Html.Raw(mark.Transform(Model.BlogPost.Body))</div>
-				<div class="panel-footer">
+				<div class="card-footer" >
 					@if (Model.BlogPost.Tags == null)
 					{
-						<span class="label label-default">This Blog Post has no Tags </span>
+						<span class="label label-default" style="text-align:right">This Blog Post has no Tags </span>
 					}
 					else
 					{
 						@foreach (var tag in Model.BlogPost.Tags)
 						{
 							<span>
-								<span><a asp-page="./TagList" asp-route-urlSlug="@tag.UrlSlug" class="label label-default">@tag.UrlSlug</a></span>
+								<span><a asp-page="./TagList" asp-route-urlSlug="@tag.UrlSlug" style="text-align:right" class="badge badge-dark">@tag.UrlSlug </a></span>
 							</span>
 						}
 					}
@@ -44,7 +44,7 @@
 			</div>
 	</p>
 <br />
-<div class="comment-container">
+<div class="container">
 	<h4>Comments:</h4>
 	@if (Model.BlogPost.Comments == null)
 	{
@@ -71,7 +71,7 @@
 			<textarea rows="3" cols="80" asp-for="CommentAccess.Body" aria-describedby="usernameHelp" class="form-control" placeholder="Comment" type="text"></textarea>
 		</label>
 		<br />
-		<button class="btn btn-primary" type="submit">Submit</button>
+		<button class="btn btn-dark" type="submit">Submit</button>
 	</div>
 	<div>
 		<a asp-page="./Index">Back to Blog Posts</a>

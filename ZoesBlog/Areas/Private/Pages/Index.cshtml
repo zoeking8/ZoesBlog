@@ -3,17 +3,17 @@
 @{
 	Layout = "_AdminLayout";
 }
-
-<h2>Zoe's Blog Admin Page</h2>
-<form>
-	<p>
-		Title: <input type="text" asp-for="SearchString" />
-		<input type="submit" value="Search" />
-		<a asp-page="./Index">Back to full List</a>
-	</p>
-</form>
-
-<table class="table">
+<div>
+	<h2>Zoe's Blog Admin Page</h2>
+	<form>
+		<p style="text-align: right">
+			<input type="text" asp-for="SearchString" />
+			<input type="submit" value="Search" />
+			<a asp-page="./Index">Back to full List</a>
+		</p>
+	</form>
+</div>
+<table class="table table-dark" style=" border-radius:8px;">
 	<thead>
 		<tr>
 		<tr>
@@ -31,13 +31,13 @@
 				<td>@blogPost.Title</td>
 				<td>@blogPost.PublishedAt</td>
 				<td>
-					<a class="btn btn-lg" asp-area="Private" asp-page="./ViewComments" asp-route-id="@blogPost.Id"> <i class="fa fa-comment-dots"></i></a>
+					<a class="btn btn-lg" asp-area="Private" asp-page="./ViewComments" asp-route-id="@blogPost.Id"> <i class="fa fa-comment-dots"style="color:white"></i></a>
 				</td>
 				<td>
-					<a class="btn btn-lg" asp-area="Private" asp-page="./EditBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-edit"></i></a>
+					<a class="btn btn-lg" asp-area="Private" asp-page="./EditBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-edit" style="color:white"></i></a>
 				</td>
 				<td>
-					<a class="btn btn-lg" asp-area="Private" asp-page="./DeleteBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-trash"></i></a>
+					<a class="btn btn-lg" asp-area="Private" asp-page="./DeleteBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-trash" style="color:white"></i></a>
 				</td>
 			</tr>
 		}
@@ -52,12 +52,12 @@
 
 	<a asp-page="./Index"
 	   asp-route-pageIndex="@(Model.BlogPosts.PageIndex - 1)"
-	   class="btn btn-primary @prevDisabled">
+	   class="btn btn-dark @prevDisabled">
 		Previous
 	</a>
 	<a asp-page="./Index"
 	   asp-route-pageIndex="@(Model.BlogPosts.PageIndex + 1)"
-	   class="btn btn-primary @nextDisabled">
+	   class="btn btn-dark @nextDisabled">
 		Next
 	</a>
 </div>

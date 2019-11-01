@@ -18,6 +18,7 @@ namespace ZoesBlog.Pages
 		public Guid BlogPostId { get; set; }
 		[BindProperty]
 		public string UrlSlug { get; set; }
+		public string TagName { get; set; }
 		public List<BlogPost> BlogPostList { get; private set; }
 		public Tag Tags { get; private set; }
 		

@@ -16,13 +16,11 @@
 	var mark = new Markdown(options);
 
 }
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
 @foreach (var blogPost in Model.BlogPosts)
 {
+	<br />
 	<div class="container">
 		<div class="row">
 			<div class="col-md-1"></div>
@@ -33,15 +31,15 @@
 							<div class="text-center">
 								<div class="row">
 									<div class="col-sm-9">
-										<h1 class="pull-left">@Html.Raw(mark.Transform(@blogPost.Title))</h1>
+										<h1 style="text-align: left">@Html.Raw(mark.Transform(@blogPost.Title))</h1>
 									</div>
 									<div class="col-sm-3">
-										<h4 class="pull-right">
+										<h6 class="pull-right">
 											<small><em>Post Published: @blogPost.PublishedAt.Humanize()</em></small>
-										</h4>
-										<h4 class="pull-right">
+										</h6>
+										<h6 class="pull-right">
 											<small><em>Time to read: @blogPost.TimeToRead minutes</em></small>
-										</h4>
+										</h6>
 									</div>
 								</div>
 							</div>
@@ -50,7 +48,7 @@
 							@Html.Raw(mark.Transform(blogPost.Body))
 						</div>
 
-						<div class="panel-footer">
+						<div class="card-footer">
 							<div class="text-center"><a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id"> Read More</a></div>
 						</div>
 					</div>
@@ -73,14 +71,14 @@
 	var nextDisabled = !Model.BlogPosts.HasNextPage ? "disabled" : "";
 }
 <div style="text-align: center">
-<a asp-page="./Index"
-   asp-route-pageIndex="@(Model.BlogPosts.PageIndex - 1)"
-   class="btn btn-primary @prevDisabled">
-	Previous
-</a>
-<a asp-page="./Index"
-   asp-route-pageIndex="@(Model.BlogPosts.PageIndex + 1)"
-   class="btn btn-primary @nextDisabled">
-	Next
-</a>
+	<a asp-page="./Index"
+	   asp-route-pageIndex="@(Model.BlogPosts.PageIndex - 1)"
+	   class="btn btn-dark @prevDisabled">
+		Previous
+	</a>
+	<a asp-page="./Index"
+	   asp-route-pageIndex="@(Model.BlogPosts.PageIndex + 1)"
+	   class="btn btn-dark @nextDisabled">
+		Next
+	</a>
 </div>

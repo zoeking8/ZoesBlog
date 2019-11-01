@@ -3,36 +3,27 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] Zoe's Blog</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/site.css" />
-	<script src="https://kit.fontawesome.com/d9198d6956.js" crossorigin="anonymous"></script>
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<title>@ViewData["Title"] - Zoe's Blog</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	<script src="https://kit.fontawesome.com/d9198d6956.js" crossorigin="anonymous"></script>
 
 </head>
-
 <body>
 	<header>
-
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-			<div class="container">
-				<a class="navbar-brand" asp-area="" asp-page="/Index">Zoe's Blog</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-page="/TagCloud">Tag Cloud</a>
-						</li>
-					</ul>
-				</div>
+		<nav class="navbar navbar-dark bg-dark navbar-expand-md border-bottom box-shadow mb-3">
+			<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+				<ul class="navbar-nav flex-grow-1">
+					<li class="nav-item">
+						<a class="nav-link text-light" asp-area="" asp-page="/Index">Zoe's Blog</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-light" asp-area="" asp-page="/TagCloud">Tag Cloud</a>
+					</li>
+				</ul>
 			</div>
 		</nav>
 	</header>

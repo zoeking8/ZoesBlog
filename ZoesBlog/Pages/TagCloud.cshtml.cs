@@ -42,7 +42,7 @@ namespace ZoesBlog.Pages
 			var sbTags = sb.ToString();
 			Tags = new HtmlString(sbTags);
 			return Page();
-
+			//"<a asp-page='./ TagList" + asp-route-urlSlug="("tag.UrlSlug")" class="label label - default">@tag.UrlSlug</a>
 		}
 
 
@@ -66,51 +66,51 @@ namespace ZoesBlog.Pages
 
 
 
-	//private readonly BlogDbContext _blogDbContext;
+		//private readonly BlogDbContext _blogDbContext;
 
-	//public Tag Tag { get; private set; }
-	//public string UrlSlug { get; set; }
-	//public List<BlogPost> BlogPosts { get; set; }
-	//public List<TagCloudTag> TagCloud { get; private set; }
-	//public TagCloudModel(BlogDbContext blogDbContext)
-	//{
-	//	_blogDbContext = blogDbContext;
-	//}
-
-
-	//private List<TagCloudTag> GenerateTagCloud()
-	//{
-	//	var analyzer = new TagCloudAnalyzer();
-
-	//	var blogPostTags = _blogDbContext
-	//					   .Tags
-	//					   .Select(t => t.Name)
-	//					   .ToList();
+		//public Tag Tag { get; private set; }
+		//public string UrlSlug { get; set; }
+		//public List<BlogPost> BlogPosts { get; set; }
+		//public List<TagCloudTag> TagCloud { get; private set; }
+		//public TagCloudModel(BlogDbContext blogDbContext)
+		//{
+		//	_blogDbContext = blogDbContext;
+		//}
 
 
-	//	var tags = analyzer.ComputeTagCloud(blogPostTags);
+		//private List<TagCloudTag> GenerateTagCloud()
+		//{
+		//	var analyzer = new TagCloudAnalyzer();
 
-	//	tags = tags.Shuffle();
-	//	return tags.ToList();
-	//}
-	//public IActionResult OnGet()
-	//{
-	//	TagCloud = GenerateTagCloud();
-	//	return Page();
+		//	var blogPostTags = _blogDbContext
+		//					   .Tags
+		//					   .Select(t => t.Name)
+		//					   .ToList();
 
-	//}
 
-	//public void OnGet()
-	//      {
-	//	var analyzer = new TagCloudAnalyzer();
+		//	var tags = analyzer.ComputeTagCloud(blogPostTags);
 
-	//	// blogPosts is an IEnumerable<String>, loaded from
-	//	// the database or whatevz.
-	//	var tags = analyzer.ComputeTagCloud(blogPosts);
+		//	tags = tags.Shuffle();
+		//	return tags.ToList();
+		//}
+		//public IActionResult OnGet()
+		//{
+		//	TagCloud = GenerateTagCloud();
+		//	return Page();
 
-	//	// Shuffle the tags, if you like for a random
-	//	// display
-	//	tags = tags.Shuffle();
-	//}
-}
+		//}
+
+		//public void OnGet()
+		//      {
+		//	var analyzer = new TagCloudAnalyzer();
+
+		//	// blogPosts is an IEnumerable<String>, loaded from
+		//	// the database or whatevz.
+		//	var tags = analyzer.ComputeTagCloud(blogPosts);
+
+		//	// Shuffle the tags, if you like for a random
+		//	// display
+		//	tags = tags.Shuffle();
+		//}
+	}
 }
