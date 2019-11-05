@@ -32,7 +32,7 @@ namespace ZoesBlog.Areas.Private.Pages
 			}
 
 			BlogPost = await _blogDbContext.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
-
+			
 			if (BlogPost == null)
 			{
 				return NotFound();
@@ -47,10 +47,11 @@ namespace ZoesBlog.Areas.Private.Pages
 				return Page();
 			}
 			_blogDbContext.Attach(BlogPost).State = EntityState.Modified;
-
+			
 			try
 			{
 				await _blogDbContext.SaveChangesAsync();
+				_blogDbContext.Attach(BlogPost).State = EntityState.Modified;
 			}
 			catch (DbUpdateConcurrencyException)
 			{

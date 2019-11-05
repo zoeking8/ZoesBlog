@@ -25,46 +25,36 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
-				<div id="postlist">
-					<div class="panel">
-						<div class="panel-heading">
-							<div class="text-center">
-								<div class="row">
-									<div class="col-sm-9">
-										<h1 style="text-align: left">@Html.Raw(mark.Transform(@blogPost.Title))</h1>
-									</div>
-									<div class="col-sm-3">
-										<h6 class="pull-right">
-											<small><em>Post Published: @blogPost.PublishedAt.Humanize()</em></small>
-										</h6>
-										<h6 class="pull-right">
-											<small><em>Time to read: @blogPost.TimeToRead minutes</em></small>
-										</h6>
-									</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<div class="text-center">
+							<div class="row">
+								<div class="col-sm-9">
+									<h1 style="text-align: left">@Html.Raw(mark.Transform(@blogPost.Title))</h1>
+								</div>
+								<div class="col-sm-3">
+									<h6 class="pull-right">
+										<small><em>Post Published: @blogPost.PublishedAt.Humanize()</em></small>
+									</h6>
+									<h6 class="pull-right">
+										<small><em>Time to read: @blogPost.TimeToRead minutes</em></small>
+									</h6>
 								</div>
 							</div>
 						</div>
-						<div class="panel-body">
-								@Html.Raw(mark.Transform(blogPost.Snippet))
-						</div>
-
-						<div class="card-footer">
-							<div class="text-center"><a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id"> Read More</a></div>
-						</div>
+					</div>
+					<div class="panel-body">
+						@Html.Raw(mark.Transform(blogPost.Snippet))
+					</div>
+					<div class="card-footer">
+						<div class="text-center"><a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id"> Read More</a></div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="col-md-3">
-			</div>
-			<div class="col-md-1">
 			</div>
 		</div>
 	</div>
 	<br />
 }
-
-
 
 @{
 	var prevDisabled = !Model.BlogPosts.HasPreviousPage ? "disabled" : "";
