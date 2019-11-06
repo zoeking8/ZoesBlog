@@ -23,11 +23,6 @@ namespace ZoesBlog.Areas.Private.Pages
 
 		public async Task<IActionResult> OnGetAsync(Guid id)
 		{
-			if (id == null)
-			{
-				return NotFound();
-			}
-
 			BlogPost = await _blogDbContext.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
 
 			if (BlogPost == null)
@@ -46,11 +41,9 @@ namespace ZoesBlog.Areas.Private.Pages
 
 			BlogPost = await _blogDbContext.BlogPosts.FindAsync(id);
 
-			if (BlogPost != null)
-			{
-				_blogDbContext.BlogPosts.Remove(BlogPost);
-				await _blogDbContext.SaveChangesAsync();
-			}
+			if (BlogPost == null) return RedirectToPage("./Index");
+			_blogDbContext.BlogPosts.Remove(BlogPost);
+			await _blogDbContext.SaveChangesAsync();
 
 			return RedirectToPage("./Index");
 		}

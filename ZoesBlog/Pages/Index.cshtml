@@ -17,58 +17,139 @@
 
 }
 
+<style>
+	* {
+		box-sizing: border-box;
+	}
 
-@foreach (var blogPost in Model.BlogPosts)
-{
-	<br />
-	<div class="container">
+	.column {
+		float: left;
+		padding: 10px;
+	}
+
+	.left {
+		width: 75%;
+	}
+
+	.right {
+		width: 25%;
+	}
+
+	.row:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+
+	#page-container {
+		position: relative;
+		min-height: 100vh;
+	}
+
+	#content-wrap {
+		padding-bottom: 2.5rem;
+	}
+
+	#footer {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 2.5rem;
+	}
+
+	.imageContainer {
+		top: 300px;
+		left: 0;
+		background-image: url(https://cdn.pixabay.com/photo/2016/01/27/15/25/space-1164579_1280.png);
+		color: white;
+		width: 100%;
+		height: 150px;
+		position: absolute;
+		object-fit: contain;
+		text-align: center;
+		top: 50px;
+		vertical-align: text-bottom;
+		padding-top: 40px;
+		padding-bottom: 30px;
+	}
+</style>
+<div>
+	<h1 class="imageContainer">Welcome to Zoe's Blog</h1>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div id="page-container">
+	<div id="content-wrap">
 		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-10">
-				<div class="panel">
-					<div class="panel-heading">
-						<div class="text-center">
+			<div class="column left">
+				<div class="container">
+					@foreach (var blogPost in Model.BlogPosts)
+					{
+						<br />
+						<div class="container">
 							<div class="row">
-								<div class="col-sm-9">
-									<h1 style="text-align: left">@Html.Raw(mark.Transform(@blogPost.Title))</h1>
-								</div>
-								<div class="col-sm-3">
-									<h6 class="pull-right">
-										<small><em>Post Published: @blogPost.PublishedAt.Humanize()</em></small>
-									</h6>
-									<h6 class="pull-right">
-										<small><em>Time to read: @blogPost.TimeToRead minutes</em></small>
-									</h6>
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
+									<div class="panel">
+										<div class="panel-heading">
+											<div class="text-center">
+												<div class="row">
+													<div class="col-sm-9">
+														<h1 style="text-align: left">@Html.Raw(mark.Transform(@blogPost.Title))</h1>
+													</div>
+													<div class="col-sm-3">
+														<h6 class="pull-right">
+															<small><em>Post Published: @blogPost.PublishedAt.Humanize()</em></small>
+														</h6>
+														<h6 class="pull-right">
+															<small><em>Time to read: @blogPost.TimeToRead minutes</em></small>
+														</h6>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="panel-body">
+											@Html.Raw(mark.Transform(blogPost.Snippet))
+										</div>
+										<div class="card-footer">
+											<div class="text-center"><a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id"> Read More</a></div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="panel-body">
-						@Html.Raw(mark.Transform(blogPost.Snippet))
-					</div>
-					<div class="card-footer">
-						<div class="text-center"><a asp-page="./IndividualBlogPost" asp-route-id="@blogPost.Id"> Read More</a></div>
-					</div>
+						<br />
+					}
 				</div>
 			</div>
+			<div class="column right">
+				<br />
+				<h1>TagCloud</h1>
+				@Model.Tags
+			</div>
 		</div>
-	</div>
-	<br />
-}
+		<br />
 
-@{
-	var prevDisabled = !Model.BlogPosts.HasPreviousPage ? "disabled" : "";
-	var nextDisabled = !Model.BlogPosts.HasNextPage ? "disabled" : "";
-}
-<div style="text-align: center">
-	<a asp-page="./Index"
-	   asp-route-pageIndex="@(Model.BlogPosts.PageIndex - 1)"
-	   class="btn btn-dark @prevDisabled">
-		Previous
-	</a>
-	<a asp-page="./Index"
-	   asp-route-pageIndex="@(Model.BlogPosts.PageIndex + 1)"
-	   class="btn btn-dark @nextDisabled">
-		Next
-	</a>
+		@{
+			var prevDisabled = !Model.BlogPosts.HasPreviousPage ? "disabled" : "";
+			var nextDisabled = !Model.BlogPosts.HasNextPage ? "disabled" : "";
+		}
+		<footer class="container" style="text-align: center ">
+			<a asp-page="./Index"
+			   asp-route-pageIndex="@(Model.BlogPosts.PageIndex - 1)"
+			   class="btn btn-dark @prevDisabled">
+				Previous
+			</a>
+			<a asp-page="./Index"
+			   asp-route-pageIndex="@(Model.BlogPosts.PageIndex + 1)"
+			   class="btn btn-dark @nextDisabled">
+				Next
+			</a>
+		</footer>
+	</div>
 </div>
+

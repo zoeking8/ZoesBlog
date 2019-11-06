@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -23,6 +24,10 @@ namespace ZoesBlog.Areas.Private.Pages
 		[BindProperty]
 		public Guid BlogPostId { get; set; }
 
+		[BindProperty]
+		public string TagsList { get; set; }
+		[BindProperty]
+		public List<Tag> Tags { get; set; }
 
 		public async Task<IActionResult> OnGetAsync(Guid id)
 		{
@@ -32,7 +37,7 @@ namespace ZoesBlog.Areas.Private.Pages
 			}
 
 			BlogPost = await _blogDbContext.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
-			
+
 			if (BlogPost == null)
 			{
 				return NotFound();
@@ -40,18 +45,34 @@ namespace ZoesBlog.Areas.Private.Pages
 			return Page();
 
 		}
+
+
 		public async Task<IActionResult> OnPost()
 		{
 			if (!ModelState.IsValid)
 			{
 				return Page();
 			}
-			_blogDbContext.Attach(BlogPost).State = EntityState.Modified;
+
+			_blogDbContext.Entry(BlogPost).Property(bp => bp.Title).IsModified = true;
+			_blogDbContext.Entry(BlogPost).Property(bp => bp.Body).IsModified = true;
+			_blogDbContext.Entry(BlogPost).Collection(bp => bp.Tags).IsModified = true;
+			_blogDbContext.Entry(BlogPost).Property(bp => bp.PublishedAt).IsModified = false;
+			_blogDbContext.Entry(BlogPost).Property(bp => bp.Snippet).IsModified = false;
+			_blogDbContext.Entry(BlogPost).Property(bp => bp.TimeToRead).IsModified = false;
+			_blogDbContext.Entry(BlogPost).Property(bp => bp.Id).IsModified = false;
+
+			BlogPost.PublishedAt = DateTime.UtcNow;
+
+			BlogPost.Snippet = string.Join(" ", BlogPost.Body.Split().Take(150).Append("..."));
 			
+			var wordCount = BlogPost.Body.Split(" ").Length;
+			var readingTimeInMinutes = Math.Floor(wordCount / 228d) + 1;
+			BlogPost.TimeToRead = readingTimeInMinutes;
+
 			try
 			{
 				await _blogDbContext.SaveChangesAsync();
-				_blogDbContext.Attach(BlogPost).State = EntityState.Modified;
 			}
 			catch (DbUpdateConcurrencyException)
 			{
@@ -67,6 +88,6 @@ namespace ZoesBlog.Areas.Private.Pages
 			return RedirectToPage("./Index");
 
 		}
-		
+
 	}
 }

@@ -25,7 +25,6 @@ namespace ZoesBlog.Areas.Private.Pages
 		public string SearchString { get; set; }
 		public string CurrentFilter { get; set; }
 
-
 		public PaginatedList<BlogPost> BlogPosts { get; set; }
 
 		public async Task OnGetAsync(int? pageIndex, string currentFilter, string searchString)
@@ -52,6 +51,5 @@ namespace ZoesBlog.Areas.Private.Pages
 				blogPostsData.AsNoTracking().
 				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
 		}
-		
 	}
 }

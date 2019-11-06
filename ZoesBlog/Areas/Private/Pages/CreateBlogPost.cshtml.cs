@@ -1,38 +1,31 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Slugify;
 using ZoesBlog.Data;
-
-
 namespace ZoesBlog.Areas.Private.Pages
 {
-    public class CreateBlogPostModel : PageModel
+	public class CreateBlogPostModel : PageModel
 	{
 		private readonly BlogDbContext _blogDbContext;
-
 		public CreateBlogPostModel(BlogDbContext blogDbContext)
 		{
 			_blogDbContext = blogDbContext;
 		}
-
 		[BindProperty]
 		public UserInputBlogPost UserBlogPost { get; set; }
 		public IActionResult OnGet()
 		{
 			return Page();
 		}
-
 		public async Task<IActionResult> OnPostAsync()
 		{
 			if (!ModelState.IsValid)
 			{
 				return Page();
 			}
-
 			var blogPost = new BlogPost
 			{
 				PublishedAt = DateTime.UtcNow,
@@ -49,29 +42,12 @@ namespace ZoesBlog.Areas.Private.Pages
 			if (!string.IsNullOrEmpty(UserBlogPost.Tags))
 			{
 				tagList = UserBlogPost.Tags.Split(",");
-				
 			}
-			var tags = new List<Tag>();
-
 			SlugHelper helper = new SlugHelper();
-
-			foreach (var userTag in tagList)
-			{
-				var tag = new Tag
-				{
-					BlogPostId = blogPost.Id,
-					Name = userTag,
-					UrlSlug = helper.GenerateSlug(userTag)
-				};
-				tags.Add(tag);
-			}
-
+			var tags = tagList.Select(userTag => new Tag { BlogPostId = blogPost.Id, Name = userTag, UrlSlug = helper.GenerateSlug(userTag) }).ToList();
 			blogPost.Tags = tags;
 			_blogDbContext.BlogPosts.Add(blogPost);
-
-
 			await _blogDbContext.SaveChangesAsync();
-
 			return RedirectToPage("./Index");
 		}
 		public class UserInputBlogPost
