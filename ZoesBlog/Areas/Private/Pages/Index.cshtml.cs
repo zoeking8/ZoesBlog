@@ -25,7 +25,6 @@ namespace ZoesBlog.Areas.Private.Pages
 		public string SearchString { get; set; }
 		public string CurrentFilter { get; set; }
 
-
 		public PaginatedList<BlogPost> BlogPosts { get; set; }
 		public List<Comment> Comments { get; set; }
 x
@@ -56,6 +55,5 @@ x
 				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
 
 		}
-		
 	}
 }

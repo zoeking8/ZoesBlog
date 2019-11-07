@@ -21,10 +21,8 @@ namespace ZoesBlog.Areas.Private.Pages
 		[BindProperty]
 		public BlogPost BlogPost { get; set; }
 
-		public async Task<IActionResult> OnGet(Guid id)
+		public async Task<IActionResult> OnGetAsync(Guid id)
 		{
-			
-
 			BlogPost = await _blogDbContext.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
 
 			if (BlogPost == null)
@@ -36,7 +34,10 @@ namespace ZoesBlog.Areas.Private.Pages
 
 		public async Task<IActionResult> OnPostAsync(Guid id)
 		{
-			
+			if (id == null)
+			{
+				return NotFound();
+			}
 
 			BlogPost = await _blogDbContext.BlogPosts.FindAsync(id);
 

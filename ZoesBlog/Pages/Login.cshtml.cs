@@ -41,7 +41,6 @@ namespace ZoesBlog.Pages
 				new Claim(ClaimTypes.Email, user.Email),
 				new Claim(ClaimTypes.Name, user.Username),
 				new Claim(ClaimTypes.Role, "Administrator")
-
 			};
 
 
@@ -52,6 +51,6 @@ namespace ZoesBlog.Pages
 			return RedirectToPage("/Index", new {area="Private"});
 
 		}
-		public void OnGet() { }
+		
 	}
 }

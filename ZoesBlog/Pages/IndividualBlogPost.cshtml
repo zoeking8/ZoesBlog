@@ -16,32 +16,32 @@
     var mark = new Markdown(options);
 }
 	<p>
-			<div style="text-align: right">
-				<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Have a look at this blog post from Zoe&#39;s Blog:" data-show-count="false">Tweet</a>
-				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-			</div>
-			<div>
-				<h1>@Html.Raw(mark.Transform(Model.BlogPost.Title))</h1>
-				<div>Published: @Model.BlogPost.PublishedAt.Humanize()</div>
-				<div>Time to Read: @Model.BlogPost.TimeToRead Minutes</div>
-				<br />
-				<div>@Html.Raw(mark.Transform(Model.BlogPost.Body))</div>
-				<div class="card-footer" >
-					@if (Model.BlogPost.Tags == null)
+		<div style="text-align: right">
+			<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Have a look at this blog post from Zoe&#39;s Blog:" data-show-count="false">Tweet</a>
+			<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		</div>
+		<div>
+			<h1>@Html.Raw(mark.Transform(Model.BlogPost.Title))</h1>
+			<div>Published: @Model.BlogPost.PublishedAt.Humanize()</div>
+			<div>Time to Read: @Model.BlogPost.TimeToRead Minutes</div>
+			<br />
+			<div>@Html.Raw(mark.Transform(Model.BlogPost.Body))</div>
+			<div class="card-footer" >
+				@if (Model.BlogPost.Tags == null)
+				{
+					<span class="label label-default" style="text-align:right">This Blog Post has no Tags </span>
+				}
+				else
+				{
+					@foreach (var tag in Model.BlogPost.Tags)
 					{
-						<span class="label label-default" style="text-align:right">This Blog Post has no Tags </span>
+						<span>
+							<span><a asp-page="./TagList" asp-route-urlSlug="@tag.UrlSlug" style="text-align:right" class="badge badge-dark">@tag.UrlSlug </a></span>
+						</span>
 					}
-					else
-					{
-						@foreach (var tag in Model.BlogPost.Tags)
-						{
-							<span>
-								<span><a asp-page="./TagList" asp-route-urlSlug="@tag.UrlSlug" style="text-align:right" class="badge badge-dark">@tag.UrlSlug </a></span>
-							</span>
-						}
-					}
-				</div>
+				}
 			</div>
+		</div>
 	</p>
 <br />
 <div class="container">

@@ -14,8 +14,6 @@ namespace ZoesBlog.Pages
 		private readonly BlogDbContext _blogDbContext;
 
 		[BindProperty]
-		public Guid BlogPostId { get; set; }
-		[BindProperty]
 		public CommentAccess CommentAccess { get; set; }
 		public IReadOnlyCollection<Comment> Comments { get; private set; }
 		public IReadOnlyCollection<Tag> Tags { get; private set; }
