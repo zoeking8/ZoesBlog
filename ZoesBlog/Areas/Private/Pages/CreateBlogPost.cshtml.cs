@@ -51,20 +51,10 @@ namespace ZoesBlog.Areas.Private.Pages
 				tagList = UserBlogPost.Tags.Split(",");
 				
 			}
-			var tags = new List<Tag>();
 
 			SlugHelper helper = new SlugHelper();
 
-			foreach (var userTag in tagList)
-			{
-				var tag = new Tag
-				{
-					BlogPostId = blogPost.Id,
-					Name = userTag,
-					UrlSlug = helper.GenerateSlug(userTag)
-				};
-				tags.Add(tag);
-			}
+			var tags = tagList.Select(userTag => new Tag {BlogPostId = blogPost.Id, Name = userTag, UrlSlug = helper.GenerateSlug(userTag)}).ToList();
 
 			blogPost.Tags = tags;
 			_blogDbContext.BlogPosts.Add(blogPost);

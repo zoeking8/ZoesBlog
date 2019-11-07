@@ -31,7 +31,7 @@
 				<td>@blogPost.Title</td>
 				<td>@blogPost.PublishedAt</td>
 				<td>
-					<a class="btn btn-lg" asp-area="Private" asp-page="./ViewComments" asp-route-id="@blogPost.Id"> <i class="fa fa-comment-dots"style="color:white"></i></a>
+					<a class="btn btn-lg" asp-area="Private" asp-page="./ViewComments" asp-route-id="@blogPost.Id"> <i class="fa fa-comment-dots"style="color:white"></i></a>@Model.Comments.
 				</td>
 				<td>
 					<a class="btn btn-lg" asp-area="Private" asp-page="./EditBlogPost" asp-route-id="@blogPost.Id"> <i class="fa fa-edit" style="color:white"></i></a>

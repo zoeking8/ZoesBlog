@@ -27,8 +27,11 @@ namespace ZoesBlog.Areas.Private.Pages
 
 
 		public PaginatedList<BlogPost> BlogPosts { get; set; }
+		public List<Comment> Comments { get; set; }
+x
 
-		public async Task OnGetAsync(int? pageIndex, string currentFilter, string searchString)
+
+		public async Task OnGetAsync(int? pageIndex, string currentFilter, string searchString, Guid id)
 		{
 			if (searchString != null)
 			{
@@ -51,6 +54,7 @@ namespace ZoesBlog.Areas.Private.Pages
 			PaginatedList<BlogPost> paginatedList = BlogPosts = await PaginatedList<BlogPost>.CreateAsync(
 				blogPostsData.AsNoTracking().
 				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
+
 		}
 		
 	}

@@ -11,22 +11,24 @@ namespace ZoesBlog.Pages
     {
 		public HtmlString Tags { get; private set; }
 		private readonly BlogDbContext _blogDbContext;
-
+		[BindProperty] public string UrlSlug { get; set; }
 
 		public TagCloudModel(BlogDbContext blogDbContext)
 		{
 			_blogDbContext = blogDbContext;
 		}
-		public IActionResult OnGet()
+		public IActionResult OnGet(string UrlSlug)
 		{
 			var CloudTags = _blogDbContext.Tags;
 
 			var groupedTags = (from t in CloudTags
 						group t by t.Name into g
-						select new { Name = g.Key, Count = g.Count() });
+						select new { Name = g.Key, Count = g.Count(), urlSlug=UrlSlug });
 			groupedTags = (from t in groupedTags
 						   orderby t.Name descending
 						   select t);
+
+
 
 			double minSize = 10;
 			double maxSize = 100;
@@ -37,7 +39,7 @@ namespace ZoesBlog.Pages
 			foreach (var tag in groupedTags)
 			{
 				double size = minSize + ((double)tag.Count - 1) * steps;
-				sb.Append("<span style='font-size:" + size + "pt'>" + tag.Name + "(" + tag.Count + ") </span>");
+				sb.Append("<a asp-page='./TagList' asp-route-urlSlug='("+ tag.urlSlug + ")'style ='font-size:" + size + "pt'>" + tag.Name + "(" + tag.Count + ") </a>");
 			}
 			var sbTags = sb.ToString();
 			Tags = new HtmlString(sbTags);

@@ -35,9 +35,9 @@ namespace ZoesBlog.Pages
 
 
 			int pageSize = 10;
-			PaginatedList<BlogPost> paginatedList = BlogPosts = await PaginatedList<BlogPost>.CreateAsync(
+			BlogPosts = await PaginatedList<BlogPost>.CreateAsync(
 				blogPostsData.AsNoTracking().
-				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
+					OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
 		}
 	}
 }

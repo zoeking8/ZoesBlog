@@ -27,7 +27,7 @@ namespace ZoesBlog.Pages
 		{
 			_blogDbContext = blogDbContext;
 		}
-		public BlogPost BlogPost { get; private set; }
+		public BlogPost BlogPost { get;  set; }
 		public IActionResult OnGet(string urlSlug)
 		{
 			UrlSlug = urlSlug;
