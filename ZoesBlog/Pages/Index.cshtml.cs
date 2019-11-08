@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -39,10 +36,10 @@ namespace ZoesBlog.Pages
 				blogPostsData.AsNoTracking().
 				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
 
-			var CloudTags = _blogDbContext.Tags;
+			var cloudTags = _blogDbContext.Tags;
 
-			var groupedTags = (from t in CloudTags
-							   let UrlSlug = t.UrlSlug
+			var groupedTags = (from t in cloudTags
+							   let urlSlug = t.UrlSlug
 							   group t by t.UrlSlug into g
 							   select new { UrlSlug = g.Key, Count = g.Count() });
 			groupedTags = (from t in groupedTags

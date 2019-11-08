@@ -11,7 +11,6 @@ namespace ZoesBlog.Areas.Private.Pages
 {
     public class ViewCommentsModel : PageModel
     {
-		
 		private readonly BlogDbContext _blogDbContext;
 
 		[BindProperty]
@@ -44,6 +43,5 @@ namespace ZoesBlog.Areas.Private.Pages
 
 			return Page();
 		}
-			
 	}
 }
