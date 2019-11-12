@@ -9,21 +9,23 @@
 		<div class="form-group">
 			<label>
 				Title
-				<textarea rows="2" cols="60" asp-for="UserBlogPost.Title" type="text" class="form-control" aria-describedby="titleHelp" placeholder="Title"></textarea>
+				<textarea rows="2" cols="60" asp-for="UserBlogPost.Title" type="text" class="form-control" placeholder="Title"></textarea>
 			</label>
-			<small id="titleHelp" class="form-text text-muted">The title of the blog post</small>
+			<small id="titleHelp" class="form-text text-muted">The title of the blog post</small>		
+			<span class="alert-danger" asp-validation-for="UserBlogPost.Title"></span>
 		</div>
 		<div class="form-group">
 			<label>
 				Body
-				<textarea rows="10" cols="100" asp-for="UserBlogPost.Body" type="text" class="form-control" aria-describedby="bodyHelp" placeholder="Body"></textarea>
+				<textarea rows="10" cols="100" asp-for="UserBlogPost.Body" type="text" class="form-control" placeholder="Body"></textarea>
 			</label>
 			<small id="bodyHelp" class="form-text text-muted">The body of the blog post</small>
+			<span class="alert-danger" asp-validation-for="UserBlogPost.Body"></span>
 		</div>
 		<div class="form-group">
 			<label>
 				Tags
-				<textarea rows="2" cols="40" asp-for="UserBlogPost.Tags" type="text" class="form-control" aria-describedby="tagHelp" placeholder="tags"></textarea>
+				<textarea rows="2" cols="40" asp-for="UserBlogPost.Tags" type="text" class="form-control" placeholder="tags"></textarea>
 			</label>
 			<small id="tagHelp" class="form-text text-muted">To add multiple tags, separate each tag with a comma.</small>
 		</div>

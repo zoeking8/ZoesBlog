@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -46,13 +47,18 @@ namespace ZoesBlog.Areas.Private.Pages
 			SlugHelper helper = new SlugHelper();
 			var tags = tagList.Select(userTag => new Tag { BlogPostId = blogPost.Id, Name = userTag, UrlSlug = helper.GenerateSlug(userTag) }).ToList();
 			blogPost.Tags = tags;
+
 			_blogDbContext.BlogPosts.Add(blogPost);
+
 			await _blogDbContext.SaveChangesAsync();
+
 			return RedirectToPage("./Index");
 		}
 		public class UserInputBlogPost
 		{
+			[Required]
 			public string Title { get; set; }
+			[Required]
 			public string Body { get; set; }
 			public string Tags { get; set; }
 		}
