@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Slugify;
 using ZoesBlog.Data;
 
 namespace ZoesBlog.Areas.Private.Pages
@@ -13,56 +14,70 @@ namespace ZoesBlog.Areas.Private.Pages
 	public class EditBlogPostModel : PageModel
 	{
 		private readonly BlogDbContext _blogDbContext;
-
+		[BindProperty]
+		public UserInputBlogPost UserBlogPost { get; set; }
 		public EditBlogPostModel(BlogDbContext blogDbContext)
 		{
 			_blogDbContext = blogDbContext;
 		}
-
+		[BindProperty]
+		public Guid BlogPostId { get; set; }
 		[BindProperty]
 		public BlogPost BlogPost { get; set; }
 		[BindProperty]
-		public Guid BlogPostId { get; set; }
-
-		[BindProperty]
-		public string TagsList { get; set; }
-		[BindProperty]
 		public string Tags { get; set; }
 
-		public async Task<IActionResult> OnGetAsync(Guid id)
+		public IActionResult OnGet(Guid id)
 		{
 			if (id == null)
 			{
 				return NotFound();
 			}
+			BlogPostId = id;
 
-			BlogPost = await _blogDbContext.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
-			var listOfTags = _blogDbContext.Tags.Where(t => t.BlogPostId == id).Select(t => t.Name).ToList();
-			Tags = listOfTags.ToString();
+			BlogPost = _blogDbContext.BlogPosts.FirstOrDefault(bp => bp.Id == id);
+
+			var tags = _blogDbContext.Tags
+				.Where(t => t.BlogPostId == id)
+				.ToList();
+
+
+			var listOfTags = new StringBuilder();
+				foreach (var tag in tags)
+				{
+					listOfTags.Append(tag.Name + ", ");
+				}
+			;
+			
+			Tags = listOfTags.ToString().Remove(listOfTags.Length-2);
+
 			if (BlogPost == null)
 			{
 				return NotFound();
 			}
 			return Page();
-
 		}
 
-
-		public async Task<IActionResult> OnPost()
+		public async Task<IActionResult> OnPost(Guid id)
 		{
-			if (!ModelState.IsValid)
 			{
+			if (!ModelState.IsValid)
+			
 				return Page();
 			}
 
 			_blogDbContext.Entry(BlogPost).Property(bp => bp.Title).IsModified = true;
 			_blogDbContext.Entry(BlogPost).Property(bp => bp.Body).IsModified = true;
 			_blogDbContext.Entry(BlogPost).Collection(bp => bp.Tags).IsModified = true;
-			_blogDbContext.Entry(BlogPost).Property(bp => bp.PublishedAt).IsModified = false;
-			_blogDbContext.Entry(BlogPost).Property(bp => bp.Snippet).IsModified = false;
-			_blogDbContext.Entry(BlogPost).Property(bp => bp.TimeToRead).IsModified = false;
+			_blogDbContext.Entry(BlogPost).Property(bp => bp.PublishedAt).IsModified = true;
+			_blogDbContext.Entry(BlogPost).Property(bp => bp.Snippet).IsModified = true;
+			_blogDbContext.Entry(BlogPost).Property(bp => bp.TimeToRead).IsModified = true;
 			_blogDbContext.Entry(BlogPost).Property(bp => bp.Id).IsModified = false;
-			_blogDbContext.Attach(Tags).State = EntityState.Modified;
+
+			var tagsDelete = _blogDbContext.Tags
+				.Where(t => t.BlogPostId == id);
+			_blogDbContext.Tags.RemoveRange(tagsDelete);
+
 			BlogPost.PublishedAt = DateTime.UtcNow;
 
 			BlogPost.Snippet = string.Join(" ", BlogPost.Body.Split().Take(150).Append("..."));
@@ -71,24 +86,25 @@ namespace ZoesBlog.Areas.Private.Pages
 			var readingTimeInMinutes = Math.Floor(wordCount / 228d) + 1;
 			BlogPost.TimeToRead = readingTimeInMinutes;
 
-			try
+			BlogPostId = id;
+			var tagList = new string[] { };
+			if (!string.IsNullOrEmpty(UserBlogPost.Tags))
 			{
-				await _blogDbContext.SaveChangesAsync();
+				tagList = UserBlogPost.Tags.Split(",");
 			}
-			catch (DbUpdateConcurrencyException)
-			{
-				if (!_blogDbContext.BlogPosts.Any(bp => bp.Id == BlogPost.Id))
-				{
-					return NotFound();
-				}
-				else
-				{
-					throw;
-				}
-			}
+			SlugHelper helper = new SlugHelper();
+			var tags = tagList.Select(userTag => new Tag { BlogPostId = BlogPost.Id, Name = userTag, UrlSlug = helper.GenerateSlug(userTag) }).ToList();
+
+			_blogDbContext.Tags.UpdateRange(tags);
+			await _blogDbContext.SaveChangesAsync();
+			
 			return RedirectToPage("./Index");
-
 		}
-
+		public class UserInputBlogPost
+		{
+			public string Title { get; set; }
+			public string Body { get; set; }
+			public string Tags { get; set; }
+		}
 	}
 }

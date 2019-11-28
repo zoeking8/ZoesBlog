@@ -22,8 +22,9 @@
 		</div>
 		<div>
 			<h1>@Html.Raw(mark.Transform(Model.BlogPost.Title))</h1>
-			<div>Published: @Model.BlogPost.PublishedAt.Humanize()</div>
-			<div>Time to Read: @Model.BlogPost.TimeToRead Minutes</div>
+			<small><em>Published: @Model.BlogPost.PublishedAt.Humanize() |</em></small>
+			<small><em>Time to Read: @Model.BlogPost.TimeToRead Minutes</em></small>
+			<br />
 			<br />
 			<div>@Html.Raw(mark.Transform(Model.BlogPost.Body))</div>
 			<div class="card-footer" >
@@ -69,6 +70,7 @@
 		<label>
 			Add Comment:
 			<textarea rows="3" cols="80" asp-for="CommentAccess.Body" aria-describedby="usernameHelp" class="form-control" placeholder="Comment" type="text"></textarea>
+			<span class="alert-danger" asp-validation-for="CommentAccess.Body"></span>
 		</label>
 		<br />
 		<button class="btn btn-dark" type="submit">Submit</button>

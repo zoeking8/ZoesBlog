@@ -26,12 +26,12 @@ namespace ZoesBlog.Pages
 			var user = _blogDbContext.Users.FirstOrDefault(u => u.Email == userAccess.Email);
 			if (user == null)
 			{
-				return Redirect("/Fail"); ;
+				return Redirect("/LoginFail"); ;
 			}
 
-			bool encryptedPassword = BCrypt.Net.BCrypt.Verify(userAccess.Password, user.Password);
+			bool isPassword = BCrypt.Net.BCrypt.Verify(userAccess.Password, user.Password);
 
-			if (!encryptedPassword)
+			if (!isPassword)
 			{
 				return Redirect("/LoginFail");
 			}
