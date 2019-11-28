@@ -27,7 +27,7 @@ namespace ZoesBlog.Areas.Private.Pages
 		[BindProperty]
 		public string TagsList { get; set; }
 		[BindProperty]
-		public List<Tag> Tags { get; set; }
+		public string Tags { get; set; }
 
 		public async Task<IActionResult> OnGetAsync(Guid id)
 		{
@@ -37,7 +37,8 @@ namespace ZoesBlog.Areas.Private.Pages
 			}
 
 			BlogPost = await _blogDbContext.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
-
+			var listOfTags = _blogDbContext.Tags.Where(t => t.BlogPostId == id).Select(t => t.Name).ToList();
+			Tags = listOfTags.ToString();
 			if (BlogPost == null)
 			{
 				return NotFound();
@@ -61,7 +62,7 @@ namespace ZoesBlog.Areas.Private.Pages
 			_blogDbContext.Entry(BlogPost).Property(bp => bp.Snippet).IsModified = false;
 			_blogDbContext.Entry(BlogPost).Property(bp => bp.TimeToRead).IsModified = false;
 			_blogDbContext.Entry(BlogPost).Property(bp => bp.Id).IsModified = false;
-
+			_blogDbContext.Attach(Tags).State = EntityState.Modified;
 			BlogPost.PublishedAt = DateTime.UtcNow;
 
 			BlogPost.Snippet = string.Join(" ", BlogPost.Body.Split().Take(150).Append("..."));
