@@ -24,5 +24,11 @@ namespace ZoesBlog.Tests.Intergration
 			Driver.Manage().Window.Maximize();
 		}
 
+		[OneTimeTearDown]
+		public void TearDown()
+		{
+			Driver = new ChromeDriver();
+			Driver.Quit(); 
+		}
 	}
 }
