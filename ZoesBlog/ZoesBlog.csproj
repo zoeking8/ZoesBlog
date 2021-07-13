@@ -36,7 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\lntosj\index.php" />
+    <None Include="wwwroot\lntosj\index.php">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
