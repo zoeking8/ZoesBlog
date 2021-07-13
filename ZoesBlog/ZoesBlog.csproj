@@ -35,4 +35,8 @@
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\lntosj\index.php" />
+  </ItemGroup>
+
 </Project>
