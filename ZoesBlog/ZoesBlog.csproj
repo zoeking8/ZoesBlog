@@ -349,6 +349,7 @@
     <None Include="bower_components\bootstrap\build\zip-examples.js" />
     <None Include="bower_components\bootstrap\CODE_OF_CONDUCT.md" />
     <None Include="bower_components\bootstrap\config.yml" />
+    <None Include="wwwroot\abdetect.js" />
     <None Include="wwwroot\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\css\bootstrap-grid.min.css.map" />
     <None Include="wwwroot\css\bootstrap-reboot.css.map" />
