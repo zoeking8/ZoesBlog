@@ -36,9 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\lntosj\index.php">
+    <Content Update="wwwroot\lntosj\index.php">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
 
 </Project>
