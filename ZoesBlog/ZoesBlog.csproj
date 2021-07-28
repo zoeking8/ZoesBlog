@@ -35,10 +35,4 @@
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="wwwroot\lntosj\index.php">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
 </Project>
