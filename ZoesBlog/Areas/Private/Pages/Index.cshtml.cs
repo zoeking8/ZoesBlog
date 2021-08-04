@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,9 @@ namespace ZoesBlog.Areas.Private.Pages
 		public string CurrentFilter { get; set; }
 
 		public PaginatedList<BlogPost> BlogPosts { get; set; }
+		public List<Comment> Comments { get; set; }
+
+
 
 		public async Task OnGetAsync(int? pageIndex, string currentFilter, string searchString)
 		{
@@ -48,6 +52,7 @@ namespace ZoesBlog.Areas.Private.Pages
 			PaginatedList<BlogPost> paginatedList = BlogPosts = await PaginatedList<BlogPost>.CreateAsync(
 				blogPostsData.AsNoTracking().
 				OrderByDescending(bp => bp.PublishedAt), pageIndex ?? 1, pageSize);
+
 		}
 	}
 }

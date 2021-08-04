@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace ZoesBlog.Tests.Intergration
@@ -10,16 +7,24 @@ namespace ZoesBlog.Tests.Intergration
 	public class HomePageTests : TestContext
 	{
 		[Test, Category("HomePage")]
-		public void Customer_Can_Go_To_Home_Page()
+		public void Admin_Can_Login()
 		{
-			Driver.Navigate().GoToUrl("https://tt-test-frontend.azurewebsites.net/");
-			Driver.FindElement(By.PartialLinkText(""));
-			var signInButton = Driver.FindElement(By.LinkText("SIGN IN"));
-			signInButton.Click();
-			Assert.IsTrue(Driver.Url == "/signin");
+			
+			Driver.Navigate().GoToUrl("https://localhost:44335");
+			Driver.FindElement(By.Id("login nav link")).Click();
 
-			var userNameField = Driver.FindElement(By.Id("Email"));
-			userNameField.SendKeys("test+2@razor.co.uk");
+			var emailInput = Driver.FindElement(By.Id("email"));
+			emailInput.SendKeys("zoe.king@razor.co.uk");
+
+			var passwordInput = Driver.FindElement(By.Id("password"));
+			passwordInput.SendKeys("Password123!");
+
+			var loginButton = Driver.FindElement(By.Id("login button"));
+			loginButton.Click();
+
+			var adminTable = Driver.FindElement(By.Id("admin table"));
+
+			Assert.IsTrue(adminTable.Displayed);
 
 		}
 	}
