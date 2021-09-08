@@ -1,0 +1,8 @@
+C:\code\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\ZoesBlog.csproj.AssemblyReference.cache
+C:\code\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\ZoesBlog.GeneratedMSBuildEditorConfig.editorconfig
+C:\code\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\ZoesBlog.AssemblyInfoInputs.cache
+C:\code\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\ZoesBlog.AssemblyInfo.cs
+C:\code\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\ZoesBlog.csproj.CoreCompileInputs.cache
+C:\code\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\ZoesBlog.MvcApplicationPartsAssemblyInfo.cache
+C:\code\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\ZoesBlog.RazorAssemblyInfo.cache
+C:\code\ZoesBlog\ZoesBlog\obj\Debug\netcoreapp3.0\ZoesBlog.RazorAssemblyInfo.cs
