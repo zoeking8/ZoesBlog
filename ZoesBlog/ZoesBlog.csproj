@@ -74,7 +74,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="bin\Debug\netcoreapp3.0\Properties\" />
     <Folder Include="bower_components\bootstrap\dist\css\" />
     <Folder Include="bower_components\bootstrap\dist\js\" />
     <Folder Include="Properties\PublishProfiles\" />
@@ -201,11 +200,11 @@
     <None Include="obj\Debug\netcoreapp3.0\staticwebassets\ZoesBlog.StaticWebAssets.Manifest.cache" />
     <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.AssemblyInfoInputs.cache" />
     <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.assets.cache" />
+    <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.csproj.AssemblyReference.cache" />
     <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.csproj.CopyComplete" />
     <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.csprojAssemblyReference.cache" />
     <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.dll" />
-    <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.exe" />
+    <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.GeneratedMSBuildEditorConfig.editorconfig" />
     <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.genruntimeconfig.cache" />
     <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.MvcApplicationPartsAssemblyInfo.cache" />
     <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.pdb" />
@@ -217,7 +216,6 @@
     <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.Views.dll" />
     <None Include="obj\Debug\netcoreapp3.0\ZoesBlog.Views.pdb" />
     <None Include="obj\project.nuget.cache" />
-    <None Include="obj\ZoesBlog.csproj.nuget.cache" />
     <None Include="obj\ZoesBlog.csproj.nuget.g.props" />
     <None Include="obj\ZoesBlog.csproj.nuget.g.targets" />
   </ItemGroup>
